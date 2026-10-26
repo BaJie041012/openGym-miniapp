@@ -9,7 +9,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = join(fileURLToPath(import.meta.url), '..', '..');
 const OUT  = join(ROOT, 'dist');
 
-const DIRS_COPY = ['pages', 'utils', 'data'];   // 整目录拷贝
+const DIRS_COPY = ['pages', 'utils', 'data', 'custom-tab-bar'];   // 整目录拷贝
 const ROOT_COPY = ['app.js', 'app.json', 'app.qdss', 'qdmp.json'];
 
 function renameDest(filePath) {

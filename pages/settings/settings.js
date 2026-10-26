@@ -5,6 +5,12 @@ Page({
 
   onLoad: function () { Store.init(); this.setData({ unit: Store.state.settings.unit || 'kg' }); },
 
+  onShow: function () {
+    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+      this.getTabBar().setData({ selected: 4 });
+    }
+  },
+
   setUnit: function (e) {
     var v = e.currentTarget.dataset.v;
     Store.updateSetting('unit', v);

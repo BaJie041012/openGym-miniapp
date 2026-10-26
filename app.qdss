@@ -137,3 +137,24 @@ page {
 
 /* === 底部通用 === */
 .license-note { text-align: center; margin-top: 24px; }
+
+/* === 自定义 tabBar === */
+.ctb-wrap {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  z-index: 999;
+}
+.ctb-bar {
+  display: flex; justify-content: space-around; align-items: center;
+  height: 60px; padding-bottom: env(safe-area-inset-bottom);
+  background: #16213e; border-top: 1px solid rgba(255,255,255,0.06);
+}
+.ctb-item {
+  flex: 1; text-align: center; padding: 8px 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.ctb-label {
+  font-size: 14px; color: #888899;
+}
+.ctb-item-active .ctb-label {
+  color: #4ECDC4; font-weight: 700; font-size: 15px;
+}
