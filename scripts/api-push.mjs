@@ -21,7 +21,8 @@ if (!REPO) {
 }
 if (!TOKEN) {
   const remoteUrl = gitTxt('git config --get remote.origin.url');
-  const m = remoteUrl.match(/^https:\/\/([^@]+)@github\.com/);
+  // URL 里 token 可能拼在 username 后面（BaJie041012ghp_xxx），也可能用 username:token
+  const m = remoteUrl.match(/^https:\/\/[^@]*?(ghp_[A-Za-z0-9]+)@/);
   if (m) { TOKEN = m[1]; console.log('凭据来源: git remote.origin.url'); }
 }
 

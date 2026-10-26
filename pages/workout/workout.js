@@ -19,12 +19,7 @@ Page({
     this._refresh();
   },
 
-  onShow: function () {
-    this._refresh();
-    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
-      this.getTabBar().setData({ selected: 2 });
-    }
-  },
+  onShow: function () { this._refresh(); },
 
   onHide: function () { this._stopRest(); },
   onUnload: function () { this._stopRest(); },

@@ -17,9 +17,6 @@ Page({
 
   onShow: function () {
     this._refresh();
-    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
-      this.getTabBar().setData({ selected: 0 });
-    }
   },
 
   _refresh: function () {

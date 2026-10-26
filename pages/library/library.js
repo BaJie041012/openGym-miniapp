@@ -19,12 +19,6 @@ Page({
     activeFilter: 'all'
   },
 
-  onShow: function () {
-    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
-      this.getTabBar().setData({ selected: 3 });
-    }
-  },
-
   selectFilter: function (e) {
     var id = e.currentTarget.dataset.id;
     var filter = FILTERS.find(function (f) { return f.id === id; });

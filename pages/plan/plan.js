@@ -11,12 +11,7 @@ Page({
     this._refresh();
   },
 
-  onShow: function () {
-    this._refresh();
-    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
-      this.getTabBar().setData({ selected: 1 });
-    }
-  },
+  onShow: function () { this._refresh(); },
 
   _refresh: function () {
     var state = Store.state;
