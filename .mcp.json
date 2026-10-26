@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "dimina": {
+      "url": "http://127.0.0.1:7787/sse"
+    }
+  }
+}
