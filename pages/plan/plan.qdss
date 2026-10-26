@@ -1,15 +1,15 @@
 .day-head { display: flex; justify-content: space-between; align-items: center; }
-.day-name { font-size: 32px; font-weight: 600; color: #eaeaea; }
+.day-name { font-size: 28px; font-weight: 600; color: #eaeaea; }
 .day-name-today { color: #4ECDC4; }
-.day-count { color: #888899; font-size: 26px; }
+.day-count { color: #888899; font-size: 22px; }
 
-.preview { margin-top: 20px; }
+.preview { margin-top: 16px; }
 .preview-item {
-  display: flex; align-items: center; padding: 8px 0;
-  font-size: 26px; color: #ccccdd;
+  display: flex; align-items: center; padding: 6px 0;
+  font-size: 22px; color: #ccccdd;
 }
-.preview-bullet { color: #4ECDC4; margin-right: 16px; }
+.preview-bullet { color: #4ECDC4; margin-right: 14px; }
 
-.edit-btn { margin-top: 20px; text-align: center; }
+.edit-btn { margin-top: 16px; text-align: center; }
 
-.license-note { text-align: center; margin-top: 32px; }
+.license-note { text-align: center; margin-top: 24px; }

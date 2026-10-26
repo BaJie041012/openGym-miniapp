@@ -2,29 +2,30 @@
 page {
   background-color: #1a1a2e;
   color: #eaeaea;
-  font-size: 28px;
+  font-size: 24px;
   line-height: 1.5;
 }
 
 .page {
   min-height: 100vh;
-  padding: 24px;
+  padding: 20px;
   box-sizing: border-box;
 }
 
 .card {
   background-color: #16213e;
-  border-radius: 16px;
-  padding: 32px;
-  margin-bottom: 24px;
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 16px;
 }
 
 .btn {
   background-color: #4ECDC4;
-  color: #1a1a2e;
-  border-radius: 12px;
-  padding: 24px 48px;
+  color: #ffffff;
+  border-radius: 10px;
+  padding: 14px 28px;
   font-weight: 600;
+  font-size: 26px;
   text-align: center;
 }
 
@@ -39,17 +40,17 @@ page {
 }
 
 .title {
-  font-size: 40px;
+  font-size: 32px;
   font-weight: 700;
   color: #ffffff;
 }
 
 .subtitle {
-  font-size: 28px;
+  font-size: 24px;
   color: #888899;
 }
 
 .muted {
-  font-size: 24px;
+  font-size: 20px;
   color: #666688;
 }
