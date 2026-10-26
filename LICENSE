@@ -1,0 +1,31 @@
+                    GNU AFFERO GENERAL PUBLIC LICENSE
+                       Version 3, 19 November 2007
+
+ Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
+ Everyone is permitted to copy and distribute verbatim copies
+ of this license document, but changing it is not allowed.
+
+---
+
+openGym 千岛小程序迁移版 — Copyright (C) 2026 openGym 迁移贡献者
+
+本项目是 openGym (https://github.com/DuarteSantos8/openGym) 的衍生作品，
+基于 GNU Affero General Public License v3.0 发布。
+
+openGym 原始项目 — Copyright (C) 2026 Duarte Santos
+
+完整许可证文本见上方 AGPL-3.0，条款同等适用。
+
+【重要】根据 openGym 原作者 Duarte Santos 的 NOTICE.md（AGPL §7 额外许可）：
+> As an additional permission under section 7 of the AGPL v3.0, the copyright holder permits
+> distribution of the openGym mobile application through app store platforms (such as the
+> Apple App Store and Google Play) whose terms of service would otherwise be incompatible
+> with the AGPL, provided the corresponding source code remains available under the AGPL at
+> the project repository.
+
+本迁移版使用千岛小程序平台（字节跳动）进行分发。该平台属于托管式应用商店，
+其平台条款与 AGPL 的源码公开义务之间可能存在冲突。请在以下两项条件下分发本项目：
+  1. 本项目完整源代码（含所有修改）在项目仓库以 AGPL-3.0 持续公开；
+  2. 在小程序内提供指向本项目源代码仓库的可访问入口。
+
+若上述条件无法满足，应暂停分发并与 openGym 原作者联系以获取正式许可。

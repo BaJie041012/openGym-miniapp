@@ -1,0 +1,60 @@
+{
+  "name": "opengym-miniapp",
+  "version": "1.0.0",
+  "private": true,
+  "description": "openGym 千岛小程序 — 自托管健身追踪与训练规划",
+  "license": "AGPL-3.0-or-later",
+  "templateInfo": {
+    "name": "default",
+    "typescript": false,
+    "css": "Sass",
+    "framework": "Vue3"
+  },
+  "scripts": {
+    "build": "taro build --type qd",
+    "build:h5": "taro build --type h5",
+    "build:weapp": "taro build --type weapp",
+    "dev": "npm run build -- --watch",
+    "dev:h5": "npm run build:h5 -- --watch"
+  },
+  "browserslist": [
+    "last 3 versions",
+    "Android >= 4.1",
+    "ios >= 8"
+  ],
+  "dependencies": {
+    "@babel/runtime": "^7.24.4",
+    "@tarojs/components": "4.2.0",
+    "@tarojs/helper": "4.2.0",
+    "@tarojs/plugin-framework-vue3": "4.2.0",
+    "@tarojs/plugin-platform-h5": "4.2.0",
+    "@tarojs/plugin-platform-weapp": "4.2.0",
+    "@tarojs/runtime": "4.2.0",
+    "@tarojs/shared": "4.2.0",
+    "@tarojs/taro": "4.2.0",
+    "pinia": "^2.2.0",
+    "taro-plugin-qd": "^1.0.2",
+    "vue": "^3.4.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.24.4",
+    "@babel/plugin-transform-class-properties": "7.25.9",
+    "@tarojs/cli": "4.2.0",
+    "@tarojs/plugin-generator": "4.2.0",
+    "@tarojs/plugin-html": "^4.3.1",
+    "@tarojs/vite-runner": "4.2.0",
+    "@vitejs/plugin-vue": "^5.0.4",
+    "@vitejs/plugin-vue-jsx": "^5.1.6",
+    "babel-preset-taro": "4.2.0",
+    "eslint": "^8.57.0",
+    "eslint-config-taro": "4.2.0",
+    "eslint-plugin-vue": "^9.17.0",
+    "postcss": "^8.5.6",
+    "sass": "^1.75.0",
+    "stylelint": "^16.4.0",
+    "stylelint-config-standard": "^38.0.0",
+    "terser": "^5.30.4",
+    "vite": "^4.2.0"
+  },
+  "packageManager": "pnpm@10.14.0+sha512.ad27a79641b49c3e481a16a805baa71817a04bbe06a38d17e60e2eaee83f6a146c6a688125f5792e48dd5ba30e7da52a5cda4c3992b9ccf333f9ce223af84748"
+}
