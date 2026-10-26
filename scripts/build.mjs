@@ -19,15 +19,18 @@ function renameDest(filePath) {
   return filePath;
 }
 
-function copyDir(src, dst) {
+function copyDir(src, dst, skipExt = []) {
   if (!existsSync(src)) return;
   mkdirSync(dst, { recursive: true });
   for (const entry of readdirSync(src)) {
     const sp = join(src, entry);
     const st = statSync(sp);
     if (st.isDirectory()) {
-      copyDir(sp, join(dst, entry));
+      copyDir(sp, join(dst, entry), skipExt);
     } else {
+      // 跳过 skipExt 列表里的扩展名
+      const ext = extname(entry);
+      if (skipExt.includes(ext)) continue;
       const dp = renameDest(join(dst, entry));
       mkdirSync(dirname(dp), { recursive: true });
       copyFileSync(sp, dp);
@@ -39,8 +42,10 @@ function build() {
   rmSync(OUT, { recursive: true, force: true });
   mkdirSync(OUT, { recursive: true });
 
+  // pages 目录跳过 .qdss（已合并进 app.qdss，避免 EMP 编译器加 scoped 属性隔离）
   for (const d of DIRS_COPY) {
-    copyDir(join(ROOT, d), join(OUT, d));
+    const skip = d === 'pages' ? ['.qdss'] : [];
+    copyDir(join(ROOT, d), join(OUT, d), skip);
   }
 
   // 根目录入口文件
