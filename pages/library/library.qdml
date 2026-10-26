@@ -1,0 +1,34 @@
+<view class="page">
+  <text class="title">动作库</text>
+  <text class="muted" style="margin-top: 8px; display: block">{{exercises.length}} 个动作</text>
+
+  <view class="filter-row">
+    <view wx:for="{{filters}}" wx:key="id"
+          class="filter-chip {{activeFilter === item.id ? 'filter-chip-active' : ''}}"
+          bindtap="selectFilter" data-id="{{item.id}}">
+      {{item.label}}
+    </view>
+  </view>
+
+  <view wx:for="{{filtered}}" wx:key="id" class="card">
+    <text class="exercise-name">{{item.name}}</text>
+    <text class="muted">{{item.nameEn}}</text>
+    <view class="exercise-meta">
+      <text class="meta-tag">{{item.equipment}}</text>
+      <text class="meta-tag {{item.difficulty === 'advanced' ? 'meta-hard' : (item.difficulty === 'beginner' ? 'meta-easy' : '')}}">
+        {{item.difficulty === 'advanced' ? '进阶' : (item.difficulty === 'beginner' ? '入门' : '中级')}}
+      </text>
+    </view>
+    <view class="muscle-tags">
+      <text wx:for="{{item.muscles}}" wx:for-item="m" wx:key="*this" class="muscle-tag">{{m}}</text>
+    </view>
+    <text class="exercise-desc">{{item.description}}</text>
+    <view class="media-banner">
+      <text>⚠️ {{item.mediaNote}}</text>
+    </view>
+  </view>
+
+  <view class="license-note">
+    <text class="muted">动作文本来自 openGym + ExerciseDB（AGPL-3.0 / MIT） · Gym visual 媒体已剥离</text>
+  </view>
+</view>

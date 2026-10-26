@@ -1,0 +1,32 @@
+<view class="page">
+  <text class="title">训练统计</text>
+
+  <view class="stats-grid">
+    <view class="stat-card">
+      <text class="stat-num">{{totalSessions}}</text>
+      <text class="stat-label">总训练次数</text>
+    </view>
+    <view class="stat-card">
+      <text class="stat-num">{{totalVolume}}</text>
+      <text class="stat-label">总训练量 (kg)</text>
+    </view>
+    <view class="stat-card">
+      <text class="stat-num">{{totalMinutes}}</text>
+      <text class="stat-label">总训练时长 (分钟)</text>
+    </view>
+    <view class="stat-card">
+      <text class="stat-num">{{currentStreak}}</text>
+      <text class="stat-label">连续训练天数</text>
+    </view>
+  </view>
+
+  <view class="card">
+    <text class="subtitle">本周训练量</text>
+    <view class="bars">
+      <view wx:for="{{weekBars}}" wx:key="day" class="bar-col">
+        <view class="bar" style="height: {{item.height}}px"></view>
+        <text class="bar-label">{{item.label}}</text>
+      </view>
+    </view>
+  </view>
+</view>

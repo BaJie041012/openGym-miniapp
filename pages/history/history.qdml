@@ -1,0 +1,17 @@
+<view class="page">
+  <text class="title">训练历史</text>
+  <text class="subtitle">共 {{history.length}} 次训练</text>
+
+  <view wx:if="{{history.length === 0}}" class="card">
+    <text class="muted">还没有训练记录，开始第一次训练吧！</text>
+  </view>
+
+  <view wx:for="{{history}}" wx:key="startedAt" class="card">
+    <text class="history-date">{{item.dateLabel}}</text>
+    <text class="subtitle">{{item.durationLabel}} · {{item.exerciseCount}} 个动作</text>
+    <view wx:if="{{item.exercises.length > 0}}" class="volume-row">
+      <text class="subtitle">总训练量</text>
+      <text class="volume-num">{{item.totalVolume}} kg</text>
+    </view>
+  </view>
+</view>
