@@ -62,12 +62,17 @@ function processBody(raw) {
   throw new Error((body && body.message) || 'request failed');
 }
 
-// 对外主入口（无后端时静默降级）
-function requestJSON(method, url, data) {
-  var headers = { 'Content-Type': 'application/json' };
+// 对外主入口（无后端时静默降级）。headers 可选（如 Authorization）。
+function requestJSON(method, url, data, headers) {
+  var allHeaders = { 'Content-Type': 'application/json' };
+  if (headers) {
+    for (var k in headers) {
+      if (Object.prototype.hasOwnProperty.call(headers, k)) allHeaders[k] = headers[k];
+    }
+  }
   return new Promise(function (resolve) { setTimeout(resolve, 0); })
     .then(function () {
-      return withTimeout(invokeBridge(method, BACKEND_BASE + url, data, headers), DEFAULT_TIMEOUT);
+      return withTimeout(invokeBridge(method, BACKEND_BASE + url, data, allHeaders), DEFAULT_TIMEOUT);
     })
     .then(processBody)
     .catch(function () { return null; }); // MVP 阶段静默降级

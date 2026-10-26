@@ -1,0 +1,264 @@
+{
+  "$comment": "openGym 精选动作中文映射表（68 条）。match 为原库 name 字段的宽松匹配键（小写化后比对）；descriptionZh/instructionsZh 严格对照原库英文 description/instructions 翻译，采用解剖学术语。muscles 为前端 MUSCLE_GROUPS id。difficulty 为人工评定。",
+  "items": [
+    { "match": "barbell bench press", "id": "bench-press", "nameZh": "杠铃平板卧推", "muscles": ["chest", "triceps", "shoulders"], "equipment": "barbell", "difficulty": "intermediate",
+      "descriptionZh": "仰卧于水平卧推凳，双手略宽于肩握持杠铃完成水平内推动作。主要发展胸大肌整体厚度，协同刺激肱三头肌与三角肌前束。",
+      "instructionsZh": ["仰卧于凳面，双脚踏实地面，肩胛骨后缩下沉，保持胸廓展开与背部中立。", "双手略宽于肩正握杠铃，出杠后将其降至乳头连线水平，肘部约呈 45° 外展。", "杠铃轻触胸部后，以胸大肌发力垂直向上推起，肘关节伸展但不锁死。", "在动作顶端主动挤压胸肌约一秒，随后控制杠铃缓慢下放，重复完成规定次数。"] },
+
+    { "match": "incline barbell bench press", "id": "incline-bench-press", "nameZh": "杠铃上斜卧推", "muscles": ["chest", "shoulders", "triceps"], "equipment": "barbell", "difficulty": "intermediate",
+      "descriptionZh": "仰卧于 30°–45° 上斜凳完成杠铃推举。躯干角度上移使刺激重点转向胸大肌上束（锁骨部）与三角肌前束，用于改善上胸维度与轮廓。",
+      "instructionsZh": ["调节斜凳至 30°–45°，仰卧后肩胛后缩，双脚踏实地面维持躯干稳定。", "正握杠铃略宽于肩，出杠后置于上胸锁骨正上方。", "控制杠铃沿胸廓平面下降至上胸附近，肘部自然内收约 45°。", "胸肌上束发力将杠铃推回起点，顶端不完全锁肘以维持张力。"] },
+
+    { "match": "dumbbell bench press", "id": "db-bench-press", "nameZh": "哑铃平板卧推", "muscles": ["chest", "triceps", "shoulders"], "equipment": "dumbbell", "difficulty": "beginner",
+      "descriptionZh": "仰卧持哑铃完成水平推举。相较杠铃，哑铃允许更大活动幅度与独立左右平衡矫正，对胸大肌及稳定肌群的发展更全面。",
+      "instructionsZh": ["仰卧于水平凳，双手各持一哑铃置于胸部两侧，肘部约 45° 外展。", "肩胛后缩贴凳，双脚踏实，核心收紧维持骨盆中立。", "自胸前垂直向上推起哑铃，至双臂近伸直且哑铃轻靠拢。", "顶端主动挤压胸肌一秒，控制哑铃缓慢回落至起始平面。"] },
+
+    { "match": "incline dumbbell bench press", "id": "incline-db-press", "nameZh": "哑铃上斜卧推", "muscles": ["chest", "shoulders", "triceps"], "equipment": "dumbbell", "difficulty": "beginner",
+      "descriptionZh": "仰卧于 30°–45° 上斜凳持哑铃推举。重点发展胸大肌上束与三角肌前束，动作幅度大于杠铃上斜卧推，利于上胸的充分伸展与收缩。",
+      "instructionsZh": ["调节斜凳至约 30°，仰卧持哑铃置于上胸两侧。", "肩胛后缩贴凳，核心收紧，双脚踏实地面。", "垂直向上推起哑铃至双臂近伸直，顶端轻靠拢并挤压。", "控制哑铃沿原路径回落至上胸两侧，保持肘部约 45° 外展。"] },
+
+    { "match": "dumbbell fly", "id": "db-fly", "nameZh": "哑铃飞鸟", "muscles": ["chest"], "equipment": "dumbbell", "difficulty": "beginner",
+      "descriptionZh": "仰卧持哑铃做水平内收弧线动作。肘关节角度全程近似固定，通过肩关节水平内收孤立刺激胸大肌，强调肌肉在拉伸位的离心控制。",
+      "instructionsZh": ["仰卧持哑铃上举于胸前，掌心相对，肘部保持微屈并锁定角度。", "以胸肌控制，将哑铃沿弧线向两侧下降，感受胸部充分拉伸。", "下降至胸部有轻微牵拉感即止，避免肘关节角度变化或肩部过度受压。", "以胸大肌水平内收的力量沿原弧线合拢哑铃，顶端主动挤压。"] },
+
+    { "match": "cable fly", "id": "cable-fly", "nameZh": "龙门架绳索夹胸", "muscles": ["chest"], "equipment": "cable", "difficulty": "beginner",
+      "descriptionZh": "站姿使用双侧绳索完成水平内收。绳索的恒定张力使胸大肌在全行程持续受载，顶端的等长收缩效果优于自由重量飞鸟。",
+      "instructionsZh": ["调整滑轮至肩部高度或略高，双手各握一侧手柄，弓步站于滑轮中点。", "躯干略前倾，肘部微屈固定，肩胛保持下沉后缩。", "以胸肌发力将双手沿弧线向前下方合拢，掌心渐趋相对。", "顶端交叉挤压胸肌一秒，缓慢控制回放至胸部充分拉伸。"] },
+
+    { "match": "push-up", "id": "push-up", "nameZh": "俯卧撑", "muscles": ["chest", "triceps", "shoulders", "core"], "equipment": "bodyweight", "difficulty": "beginner",
+      "descriptionZh": "自重水平推举的基础动作。双手撑地完成躯干的下降与推起，同时要求核心与臀肌全程参与维持身体刚性直线，兼具胸肌与核心训练价值。",
+      "instructionsZh": ["俯身双手略宽于肩撑地，双腿并拢，身体从头到踝呈一条直线。", "核心与臀肌收紧，避免塌腰或撅臀。", "屈肘使躯干整体下降至胸部接近地面，肘部约 45° 外展。", "以胸肌发力推起身体至双臂伸直，顶端保持肩胛不翼状耸起。"] },
+
+    { "match": "chest dip", "id": "chest-dip", "nameZh": "双杠臂屈伸（胸式）", "muscles": ["chest", "triceps"], "equipment": "bodyweight", "difficulty": "intermediate",
+      "descriptionZh": "双杠间完成自重下降与推起。躯干前倾约 30° 并屈肘外展时，负荷重点由肱三头肌转向胸大肌下束，是发展下胸的优秀自重动作。",
+      "instructionsZh": ["双手握杠撑起身体，躯干前倾，双腿屈膝交叠于体后。", "控制身体下降至肩部略低于肘部，肘部自然外展。", "以胸肌发力推起身体至双臂近伸直，保持躯干前倾角度不变。", "顶端不完全锁肘，随即进入下一次离心阶段。"] },
+
+    { "match": "machine chest press", "id": "machine-chest-press", "nameZh": "坐姿推胸器", "muscles": ["chest", "triceps", "shoulders"], "equipment": "machine", "difficulty": "beginner",
+      "descriptionZh": "坐姿器械水平推举。固定运动轨迹降低了稳定要求，适合初学者建立动作模式或大重量冲击阶段的辅助训练，胸大肌受载均匀且安全。",
+      "instructionsZh": ["调节座椅高度使手柄与胸部中线齐平，背部与臀部贴紧靠垫。", "双手正握手柄，与肩同宽或略宽。", "以胸肌发力将手柄向前推出至双臂近伸直，不锁肘。", "控制手柄缓慢回落至起始位，保持肩胛全程贴靠。"] },
+
+    { "match": "pull-up", "id": "pull-up", "nameZh": "引体向上（正手）", "muscles": ["back", "biceps", "forearms"], "equipment": "bodyweight", "difficulty": "advanced",
+      "descriptionZh": "正手宽握悬垂于横杆，将身体垂直上拉至下颌过杆。背阔肌为主要动力源，是发展背部宽度与相对力量的经典自重动作。",
+      "instructionsZh": ["正握横杆略宽于肩，完全悬垂，肩胛先下沉启动。", "以背阔肌收缩带动肘部向下向后，将身体垂直上拉。", "下颌过杆后顶端挤压背肌一秒，避免借力摆动。", "控制身体缓慢下降至完全悬垂，肩胛保持主动而非松弛。"] },
+
+    { "match": "chin-up", "id": "chin-up", "nameZh": "引体向上（反手）", "muscles": ["back", "biceps"], "equipment": "bodyweight", "difficulty": "intermediate",
+      "descriptionZh": "反手窄握完成垂直上拉。相较正手引体，肱二头肌参与度显著提高，背阔肌下部与胸大肌纤维的刺激也更充分。",
+      "instructionsZh": ["反握横杆与肩同宽，完全悬垂并主动沉肩。", "屈肘将身体沿垂直线上拉，肘部指向地面。", "下颌过杆后挤压背肌与肱二头肌一秒。", "控制下降至完全悬垂，重复规定次数。"] },
+
+    { "match": "lat pulldown", "id": "lat-pulldown", "nameZh": "高位下拉", "muscles": ["back", "biceps"], "equipment": "cable", "difficulty": "beginner",
+      "descriptionZh": "坐姿宽握横杆向下拉至锁骨水平。背阔肌主导的肩关节内收动作，是引体向上器械化替代方案，便于精准控制负荷与渐进超负荷。",
+      "instructionsZh": ["坐姿调节大腿垫固定下肢，双手宽握横杆。", "躯干略后倾约 15°，胸廓上提，肩胛下沉启动。", "以背阔肌发力将横杆下拉至锁骨附近，肘部垂直向下。", "顶端挤压背肌一秒，控制横杆缓慢回放至完全伸展。"] },
+
+    { "match": "bent over row", "id": "bent-over-row", "nameZh": "俯身杠铃划船", "muscles": ["back", "biceps", "lower-back"], "equipment": "barbell", "difficulty": "intermediate",
+      "descriptionZh": "髋铰链俯身约 45° 持杠铃完成水平划船。同时发展背阔肌厚度、斜方肌中部与竖脊肌等姿势稳定肌，对髋铰链刚性有较高要求。",
+      "instructionsZh": ["双脚与髋同宽，屈髋俯身至躯干约与地面成 45°，背部平直中立。", "正握杠铃自然悬垂于肩下方，核心收紧锁定躯干角度。", "以背肌发力将杠铃拉向下腹部，肘部贴近躯干。", "顶端挤压肩胛一秒，控制杠铃缓慢下放至完全伸展。"] },
+
+    { "match": "one-arm dumbbell row", "id": "db-row", "nameZh": "单臂哑铃划船", "muscles": ["back", "biceps"], "equipment": "dumbbell", "difficulty": "beginner",
+      "descriptionZh": "单手支撑于凳面、另一手持哑铃完成单侧水平划船。单侧负荷允许更大动作幅度与背阔肌的独立发展，同时纠正左右力量不平衡。",
+      "instructionsZh": ["单膝与同侧手撑凳，另一脚踏实地面，背部平直与地面近乎平行。", "对侧手持哑铃完全悬垂，肩胛自然伸展。", "以背阔肌发力将哑铃拉向髋部，肘部贴近躯干上提。", "顶端挤压肩胛一秒，控制哑铃下放至完全伸展。"] },
+
+    { "match": "seated cable row", "id": "seated-cable-row", "nameZh": "坐姿绳索划船", "muscles": ["back", "biceps"], "equipment": "cable", "difficulty": "beginner",
+      "descriptionZh": "坐姿面向滑轮完成水平划船。躯干有支撑、轨迹稳定，重点刺激背阔肌与斜方肌中部，适合作为背部厚度的安全主力或辅助动作。",
+      "instructionsZh": ["坐姿屈膝微屈，双脚踩实踏板，背部中立。", "双手握把手，先以肩胛下沉与后缩启动。", "将把手拉向腹部，肘部贴躯干向后，胸廓保持上提。", "顶端挤压背肌一秒，控制把手回放至背肌充分伸展。"] },
+
+    { "match": "barbell deadlift", "id": "deadlift", "nameZh": "杠铃硬拉", "muscles": ["lower-back", "hamstrings", "glutes", "back"], "equipment": "barbell", "difficulty": "advanced",
+      "descriptionZh": "自地面拉起杠铃至髋关节完全伸展的全身性铰链动作。整合后侧链（臀肌、腘绳肌、竖脊肌）与握力、核心刚性，是力量发展的基石动作。",
+      "instructionsZh": ["杠铃贴近胫骨，屈髋俯身正反握杠铃，背部平直，肩胛位于杠铃正上方。", "深吸气绷紧核心，腿部发力使杠铃沿小腿垂直上升。", "杠铃过膝后髋部前推，直至髋膝完全伸展、躯干直立。", "以髋铰链方式控制杠铃沿原路径贴身放回地面。"] },
+
+    { "match": "back extension", "id": "back-extension", "nameZh": "山羊挺身", "muscles": ["lower-back", "glutes", "hamstrings"], "equipment": "bodyweight", "difficulty": "beginner",
+      "descriptionZh": "罗马凳上以髋为轴完成躯干的屈伸。主要强化竖脊肌的耐力与控制，协同臀肌与腘绳肌参与髋关节伸展。",
+      "instructionsZh": ["髋部贴于罗马凳垫，双脚固定，躯干自然下垂。", "双手交叉于胸前，核心收紧。", "以臀肌与竖脊肌发力将躯干抬起至与身体呈一条直线，不过度超伸。", "控制躯干缓慢下降回起始位。"] },
+
+    { "match": "standing overhead press", "id": "overhead-press", "nameZh": "站姿杠铃推举", "muscles": ["shoulders", "triceps", "core"], "equipment": "barbell", "difficulty": "intermediate",
+      "descriptionZh": "站姿将杠铃自肩前推举至头顶伸直。三角肌前束与中束为主导，核心全程抗伸展维持躯干刚性，是发展垂直推力的基础复合动作。",
+      "instructionsZh": ["双脚与髋同宽，杠铃置于锁骨与三角肌前束上，肘部略前于杠铃。", "核心与臀部收紧，避免腰椎超伸。", "垂直推起杠铃过头顶，至双臂完全伸直且杠铃位于耳侧正上方。", "顶端肩胛上回旋稳定，控制杠铃回落至锁骨位。"] },
+
+    { "match": "dumbbell shoulder press", "id": "db-shoulder-press", "nameZh": "哑铃坐姿推举", "muscles": ["shoulders", "triceps"], "equipment": "dumbbell", "difficulty": "beginner",
+      "descriptionZh": "坐姿持哑铃自肩侧推举至头顶。哑铃的独立运动允许更自然的肩胛节律与更大活动范围，对三角肌前束、中束及肱三头肌均衡刺激。",
+      "instructionsZh": ["坐姿背部贴靠，双手持哑铃于肩侧，掌心朝前。", "核心收紧，避免腰椎超伸。", "垂直向上推起哑铃至双臂近伸直，顶端轻靠拢。", "控制哑铃回落至肩侧起始位。"] },
+
+    { "match": "dumbbell lateral raise", "id": "lateral-raise", "nameZh": "哑铃侧平举", "muscles": ["shoulders"], "equipment": "dumbbell", "difficulty": "beginner",
+      "descriptionZh": "站姿双臂侧向平举至肩高。孤立刺激三角肌中束，决定肩部宽度与轮廓的关键动作，需严格避免借力摆动。",
+      "instructionsZh": ["站姿双手持哑铃置于体侧，肘部微屈固定。", "以三角肌中束发力将哑铃沿体侧上举至肩部水平，小拇指略高。", "顶端停顿一秒，避免耸肩或躯干后仰。", "控制哑铃缓慢回落，保持全程张力。"] },
+
+    { "match": "cable face pull", "id": "face-pull", "nameZh": "绳索面拉", "muscles": ["shoulders", "back"], "equipment": "cable", "difficulty": "beginner",
+      "descriptionZh": "面向高位滑轮将绳索拉向面部并外旋肩关节。强化三角肌后束与肩袖外旋肌群，是改善圆肩体态与肩部健康的重要补充动作。",
+      "instructionsZh": ["调整滑轮至眼部高度，双手正握绳索两端，后退建立张力。", "将绳索拉向面部两侧，肘部外展高于手腕，肩胛后缩。", "顶端外旋挤压肩后束与肩袖一秒。", "控制绳索缓慢回放至双臂完全伸展。"] },
+
+    { "match": "barbell curl", "id": "bicep-curl", "nameZh": "杠铃弯举", "muscles": ["biceps", "forearms"], "equipment": "barbell", "difficulty": "beginner",
+      "descriptionZh": "站姿屈肘将杠铃自体侧弯举至肩前。肱二头肌为主导的肘关节屈曲动作，需严格锁定上臂位置以隔离刺激。",
+      "instructionsZh": ["站姿反握杠铃与肩同宽，上臂贴紧躯干两侧。", "以肱二头肌发力屈肘将杠铃弯举至肩前，避免躯干后仰借力。", "顶端挤压二头肌一秒。", "控制杠铃缓慢下放至双臂完全伸展。"] },
+
+    { "match": "dumbbell curl", "id": "db-curl", "nameZh": "哑铃弯举", "muscles": ["biceps"], "equipment": "dumbbell", "difficulty": "beginner",
+      "descriptionZh": "站姿持哑铃完成单臂或双臂屈肘弯举。前臂可自由旋转（旋后），使肱二头肌在全范围获得更完整的收缩。",
+      "instructionsZh": ["站姿双手持哑铃于体侧，掌心相对。", "屈肘上举的同时前臂旋后，至掌心朝肩。", "顶端挤压二头肌一秒，肘部保持固定。", "控制哑铃缓慢下放并旋前还原。"] },
+
+    { "match": "hammer curl", "id": "hammer-curl", "nameZh": "锤式弯举", "muscles": ["biceps", "forearms"], "equipment": "dumbbell", "difficulty": "beginner",
+      "descriptionZh": "掌心相对的中立位弯举。同时刺激肱二头肌、肱肌与肱桡肌，是增加上臂厚度与前臂围度的复合屈肘动作。",
+      "instructionsZh": ["站姿双手持哑铃于体侧，掌心相对呈中立位。", "屈肘将哑铃上举至肩前，全程保持中立握姿。", "顶端挤压一秒，肘部锁定于躯干两侧。", "控制哑铃缓慢下放至完全伸展。"] },
+
+    { "match": "triceps pushdown", "id": "triceps-pushdown", "nameZh": "绳索下压", "muscles": ["triceps"], "equipment": "cable", "difficulty": "beginner",
+      "descriptionZh": "站姿面向高位滑轮，伸肘将绳索下压至大腿前侧。孤立刺激肱三头肌（三头长头及内外侧头），绳索恒定张力使顶端收缩充分。",
+      "instructionsZh": ["调整滑轮至高位，双手握杆与胸同宽，肘部锁定于躯干两侧。", "以肱三头肌发力伸肘将杆下压至大腿前侧，顶端完全伸展。", "挤压三头肌一秒。", "控制杆缓慢回放至前臂贴近上臂，肘位不漂移。"] },
+
+    { "match": "lying triceps extension", "id": "skull-crusher", "nameZh": "仰卧臂屈伸", "muscles": ["triceps"], "equipment": "barbell", "difficulty": "intermediate",
+      "descriptionZh": "仰卧屈肘使杠铃下降至前额附近再伸肘还原。肱三头肌长头在肩屈位被预先拉长，刺激更为充分。",
+      "instructionsZh": ["仰卧持杠铃（EZ杆为宜）于胸口上方，双臂伸直。", "保持上臂垂直固定，屈肘使杠铃缓慢下降至前额上方。", "以三头肌发力伸肘将杠铃还原至胸口上方，肘位不外展。", "重复全程保持上臂稳定。"] },
+
+    { "match": "close-grip bench press", "id": "close-grip-bench", "nameZh": "窄距卧推", "muscles": ["triceps", "chest", "shoulders"], "equipment": "barbell", "difficulty": "intermediate",
+      "descriptionZh": "窄握完成卧推。负荷重心由胸肌转向肱三头肌（尤其内侧头），是发展三头水平推力与卧推锁定力量的主要辅助动作。",
+      "instructionsZh": ["仰卧正握杠铃，握距与肩同宽或略窄。", "出杠后降至下胸位置，肘部贴近躯干。", "以三头肌主导将杠铃推起至双臂伸直。", "控制杠铃下放，全程肘部不外飘。"] },
+
+    { "match": "bench dip", "id": "bench-dip", "nameZh": "凳上臂屈伸", "muscles": ["triceps", "chest", "shoulders"], "equipment": "bodyweight", "difficulty": "beginner",
+      "descriptionZh": "双手反撑于凳沿、身体悬空完成屈伸肘。自重条件下集中刺激肱三头肌，动作简便适合居家与训练收尾。",
+      "instructionsZh": ["双手与肩同宽反撑凳沿，双腿前伸或屈膝，臀部离凳。", "屈肘使身体下降至上臂约与地面平行，肘部朝后。", "以三头肌发力推起身体至双臂伸直。", "控制下降速度，避免耸肩。"] },
+
+    { "match": "barbell back squat", "id": "squat", "nameZh": "杠铃后蹲", "muscles": ["quads", "glutes", "hamstrings", "core"], "equipment": "barbell", "difficulty": "advanced",
+      "descriptionZh": "杠铃置于斜方肌上部，屈髋屈膝下蹲至大腿平行或更低后蹲起。下肢整体力量与核心刚性发展的核心动作，膝关节与髋关节协同主导。",
+      "instructionsZh": ["杠铃置于斜方肌上部，双脚与肩同宽或略宽，脚尖略外展。", "深吸气绷紧核心，屈髋屈膝同步下蹲，膝盖与脚尖同向。", "下蹲至大腿与地面平行或更低，保持背部中立、重心位于足中。", "以臀腿协同发力沿原路径蹲起至髋膝完全伸展。"] },
+
+    { "match": "leg press", "id": "leg-press", "nameZh": "倒蹬机腿举", "muscles": ["quads", "glutes", "hamstrings"], "equipment": "machine", "difficulty": "beginner",
+      "descriptionZh": "坐姿蹬起负重平台。躯干有靠背支撑、轨迹固定，可安全使用大负荷发展股四头肌与臀肌，是蹲类动作的高效辅助。",
+      "instructionsZh": ["坐姿背部臀部贴紧靠垫，双脚与肩同宽置于平台中部。", "解锁安全销，屈膝使平台下降至膝约 90°。", "以全脚掌发力蹬起平台至双腿近伸直，不锁膝。", "控制平台缓慢回落，保持腰臀部全程贴靠。"] },
+
+    { "match": "leg extension", "id": "leg-extension", "nameZh": "坐姿腿屈伸", "muscles": ["quads"], "equipment": "machine", "difficulty": "beginner",
+      "descriptionZh": "坐姿伸膝将负重垫上举。孤立刺激股四头肌（尤其股直肌），是膝关节伸展力量的直接训练与腿型雕刻动作。",
+      "instructionsZh": ["坐姿调节靠背使膝关节对准机器转轴，小腿前侧抵住负重垫。", "双手握座椅把手稳定躯干。", "以股四头肌发力伸膝上举至双腿近伸直，顶端挤压一秒。", "控制负重缓慢回落，不完全卸力。"] },
+
+    { "match": "walking lunge", "id": "lunge", "nameZh": "行走弓步蹲", "muscles": ["quads", "glutes", "hamstrings"], "equipment": "dumbbell", "difficulty": "beginner",
+      "descriptionZh": "持哑铃交替向前迈步完成单腿下蹲。单侧模式改善左右腿力量与稳定性不平衡，髋膝协同参与， Functional 价值高。",
+      "instructionsZh": ["站立持哑铃于体侧，单腿前迈一大步。", "屈膝下沉至前膝约 90°、后膝接近地面，躯干保持直立。", "前腿发力蹬地并收回，换腿继续向前迈步。", "全程核心收紧，膝盖与脚尖同向。"] },
+
+    { "match": "bulgarian split squat", "id": "bulgarian-split-squat", "nameZh": "保加利亚分腿蹲", "muscles": ["quads", "glutes"], "equipment": "dumbbell", "difficulty": "intermediate",
+      "descriptionZh": "后脚垫高完成单腿下蹲。极大的单侧负荷与平衡要求，重点发展股四头肌与臀肌，同时暴露并矫正单侧力量不足。",
+      "instructionsZh": ["后脚背置于凳上，前腿向前跨出约一步半距离。", "持哑铃于体侧，躯干微前倾，核心收紧。", "垂直下沉至前膝约 90°、后膝接近地面。", "前腿发力蹲起至近伸直，重复后换边。"] },
+
+    { "match": "romanian deadlift", "id": "romanian-deadlift", "nameZh": "罗马尼亚硬拉", "muscles": ["hamstrings", "glutes", "lower-back"], "equipment": "barbell", "difficulty": "intermediate",
+      "descriptionZh": "自站立位以髋铰链下放杠铃至小腿中部再起立。与硬拉的区别在于起始为离心阶段，腘绳肌在拉伸位持续受载，是后侧链肥大与柔韧的黄金动作。",
+      "instructionsZh": ["站姿持杠铃于髋前，膝微屈固定。", "屈髋将杠铃贴腿下放，臀部后移，背部平直中立。", "下放至腘绳肌有明显拉伸感（约小腿中部）即止。", "以臀肌与腘绳肌发力伸髋站起，顶端臀部收紧。"] },
+
+    { "match": "lying leg curl", "id": "lying-leg-curl", "nameZh": "俯卧腿弯举", "muscles": ["hamstrings"], "equipment": "machine", "difficulty": "beginner",
+      "descriptionZh": "俯卧屈膝将负重垫向臀部卷起。孤立刺激腘绳肌（膝屈曲功能），与伸膝类动作互补，平衡大腿前后侧发展。",
+      "instructionsZh": ["俯卧于器械，脚后跟抵住负重垫，双手握把手固定躯干。", "屈膝将负重垫向臀部卷起，臀部不抬起。", "顶端挤压腘绳肌一秒。", "控制负重缓慢回落至双腿近伸直。"] },
+
+    { "match": "barbell hip thrust", "id": "hip-thrust", "nameZh": "杠铃臀推", "muscles": ["glutes", "hamstrings"], "equipment": "barbell", "difficulty": "intermediate",
+      "descriptionZh": "肩胛倚靠长凳，将杠铃置于髋部完成髋关节伸展。臀大肌在缩短位直接对抗负荷，是当前发展臀肌峰值张力最有效的动作之一。",
+      "instructionsZh": ["肩胛上背倚靠凳沿，杠铃加垫置于髋部，双脚踩实地面。", "下巴微收，核心收紧。", "以臀肌发力伸髋将杠铃顶起至躯干与地面平行，膝髋踝约 90°。", "顶端臀部完全收紧一秒，控制杠铃下放但臀部不完全落地。"] },
+
+    { "match": "glute bridge", "id": "glute-bridge", "nameZh": "臀桥", "muscles": ["glutes", "hamstrings"], "equipment": "bodyweight", "difficulty": "beginner",
+      "descriptionZh": "仰卧屈膝伸髋抬起骨盆。低负荷激活臀大肌与核心稳定，常作为臀部训练的热身或居家基础动作。",
+      "instructionsZh": ["仰卧屈膝，双脚与髋同宽踩实，双臂置于体侧。", "以臀肌发力伸髋抬起骨盆至肩膝呈一条直线。", "顶端臀部收紧一秒，避免腰椎超伸。", "控制骨盆缓慢下降至接近但不接触地面。"] },
+
+    { "match": "plank", "id": "plank", "nameZh": "平板支撑", "muscles": ["core"], "equipment": "bodyweight", "difficulty": "beginner",
+      "descriptionZh": "肘撑地保持身体静态直线。等长收缩训练核心深层肌群（腹横肌、多裂肌）与肩带稳定，是核心抗伸展能力的基础评估与训练动作。",
+      "instructionsZh": ["俯身双肘撑地与肩同宽，双腿后伸以前脚掌着地。", "收紧核心与臀肌，使头、背、髋、踝呈一条直线。", "保持自然呼吸，避免塌腰、撅臀或肩胛下陷。", "按时间规定维持，疲劳变形即停。"] },
+
+    { "match": "crunch", "id": "crunch", "nameZh": "卷腹", "muscles": ["core"], "equipment": "bodyweight", "difficulty": "beginner",
+      "descriptionZh": "仰卧屈膝以腹直肌收缩使胸椎向骨盆卷起。腰椎保持贴地、仅完成脊柱屈曲，与坐起类动作相比对腹肌刺激更孤立。",
+      "instructionsZh": ["仰卧屈膝约 90°，双手轻扶耳侧或胸前。", "以腹直肌收缩将肩胛抬离地面，下背保持贴地。", "顶端呼气并挤压腹肌一秒，颈部不前探。", "控制缓慢回落，腹肌不完全松弛。"] },
+
+    { "match": "hanging leg raise", "id": "hanging-leg-raise", "nameZh": "悬垂举腿", "muscles": ["core"], "equipment": "bodyweight", "difficulty": "advanced",
+      "descriptionZh": "悬垂于横杆将双腿伸直上举至水平以上。同时挑战下腹（腹直肌下部）与髋屈肌力量、握力及肩带稳定性，是高阶核心动作。",
+      "instructionsZh": ["正握横杆完全悬垂，肩胛下沉稳定。", "以腹部发力屈髋上举双腿至脚尖过杠高度，骨盆后倾卷起。", "顶端挤压下腹一秒，避免借力摆动。", "控制双腿缓慢下放至初始悬垂位。"] },
+
+    { "match": "russian twist", "id": "russian-twist", "nameZh": "俄罗斯转体", "muscles": ["core"], "equipment": "bodyweight", "difficulty": "beginner",
+      "descriptionZh": "坐姿抬腿完成躯干左右旋转。训练腹斜肌的旋转与抗旋转能力，可持重物增加负荷。",
+      "instructionsZh": ["坐姿屈膝，上身后倾约 45°，双手持重物于胸前。", "保持下背挺直，以腹斜肌发力将躯干与重物转向一侧。", "再转向另一侧为一次，臀部保持稳定不晃。", "全程核心收紧，动作节奏受控。"] },
+
+    { "match": "standing calf raise", "id": "standing-calf-raise", "nameZh": "站姿提踵", "muscles": ["calves"], "equipment": "machine", "difficulty": "beginner",
+      "descriptionZh": "站姿跖屈踝关节抬起身体。膝关节伸直位下主要刺激腓肠肌，需充分利用全幅度（充分拉伸—顶端收缩）。",
+      "instructionsZh": ["前脚掌踩于踏板边缘，脚跟悬空，肩部顶住负重垫。", "脚跟下降至小腿充分拉伸。", "以小腿发力跖屈将脚跟抬至最高点，顶端挤压一秒。", "控制脚跟缓慢下降，不在底部卸力。"] },
+
+    { "match": "seated calf raise", "id": "seated-calf-raise", "nameZh": "坐姿提踵", "muscles": ["calves"], "equipment": "machine", "difficulty": "beginner",
+      "descriptionZh": "坐姿屈膝约 90° 完成跖屈。屈膝使腓肠肌处于力学劣势，负荷转移至比目鱼肌，与站姿提踵互补。",
+      "instructionsZh": ["坐姿前脚掌置于踏板，负重垫置于大腿下段。", "脚跟下降至小腿充分拉伸。", "跖屈抬起脚跟至最高点，顶端挤压一秒。", "控制缓慢回落。"] },
+
+    { "match": "wrist curl", "id": "wrist-curl", "nameZh": "腕弯举", "muscles": ["forearms"], "equipment": "dumbbell", "difficulty": "beginner",
+      "descriptionZh": "前臂支撑屈腕卷起负重。孤立训练前臂屈肌群（桡侧/尺侧腕屈肌、指浅屈肌），提升握力与腕部稳定性。",
+      "instructionsZh": ["坐姿前臂置于大腿或凳面，手腕悬空，反握哑铃掌心朝上。", "以腕屈肌发力向上卷起手腕至最高点。", "顶端挤压一秒。", "控制手腕缓慢下放至充分伸展。"] },
+
+    { "match": "barbell shrug", "id": "shrug", "nameZh": "杠铃耸肩", "muscles": ["traps"], "equipment": "barbell", "difficulty": "beginner",
+      "descriptionZh": "站姿垂直上提肩胛（耸肩）。孤立刺激斜方肌上部，动作短小但需严格控制幅度与顶峰收缩。",
+      "instructionsZh": ["站姿正握杠铃于体前悬垂，双臂完全伸直。", "垂直向上耸肩至最高点，想象肩峰去碰耳朵。", "顶端挤压斜方肌一秒，不屈肘、不后仰。", "控制肩胛缓慢下降至完全放松。"] },
+
+    { "match": "burpee", "id": "burpee", "nameZh": "波比跳", "muscles": ["core", "quads", "chest", "shoulders"], "equipment": "bodyweight", "difficulty": "intermediate",
+      "descriptionZh": "整合下蹲、俯卧撑与纵跳的全身性输出动作。对心肺系统与多肌群耐力要求极高，常用于高强度间歇训练的收尾。",
+      "instructionsZh": ["站立后下蹲双手撑地，双脚后跳成俯撑姿势。", "完成一次俯卧撑（可选）。", "双脚跳回双手两侧，起身发力纵跳并过头击掌。", "落地缓冲后立即进入下一次，保持节奏均匀。"] },
+
+    { "match": "mountain climber", "id": "mountain-climber", "nameZh": "登山跑", "muscles": ["core", "quads"], "equipment": "bodyweight", "difficulty": "beginner",
+      "descriptionZh": "俯撑姿势交替提膝至胸前。核心维持抗伸展的同时，髋屈肌与股四头肌快速交替工作，兼具核心稳定与心肺刺激。",
+      "instructionsZh": ["俯撑姿势，双手位于肩部正下方，身体呈一条直线。", "核心收紧，双腿交替将膝盖快速拉向胸口。", "保持髋部高度稳定，不塌腰不撅臀。", "按时间或次数规定持续交替。"] },
+
+    { "match": "kettlebell swing", "id": "kettlebell-swing", "nameZh": "壶铃摆动", "muscles": ["glutes", "hamstrings", "core"], "equipment": "kettlebell", "difficulty": "intermediate",
+      "descriptionZh": "以髋铰链爆发力将壶铃甩至胸前高度。后侧链爆发功率输出与核心抗负荷的经典动作，心肺负荷显著。",
+      "instructionsZh": ["壶铃置于体前，屈髋俯身握把，背部平直。", "向后摆壶铃至两腿之间，然后爆发伸髋将壶铃前甩。", "壶铃借髋部爆发力升至胸口高度，臀肌收紧、核心绷紧。", "壶铃下落时顺势屈髋缓冲回摆，动作节奏由髋驱动而非手臂。"] },
+
+    { "match": "cable woodchopper", "id": "cable-chop", "nameZh": "绳索伐木", "muscles": ["core", "shoulders"], "equipment": "cable", "difficulty": "intermediate",
+      "descriptionZh": "高位或低位滑轮完成斜向旋转拉切。训练腹斜肌与核心的抗旋转及旋转功率输出，动作链贯穿肩—髋。",
+      "instructionsZh": ["调整滑轮至高位，侧身站立，双手握绳索一端。", "以腹斜肌与髋部协同发力，将绳索斜向下拉切至对侧髋部。", "顶端旋转躯干、手臂基本伸直。", "控制绳索缓慢回到起始位，躯干旋转受控。"] },
+
+    { "match": "dumbbell front raise", "id": "front-raise", "nameZh": "哑铃前平举", "muscles": ["shoulders"], "equipment": "dumbbell", "difficulty": "beginner",
+      "descriptionZh": "站姿双臂前举哑铃至肩高。孤立刺激三角肌前束，该肌群在多数推类动作中已充分参与，常作为小负荷补充。",
+      "instructionsZh": ["站姿持哑铃于大腿前侧，肘部微屈。", "以三角肌前束发力将哑铃前举至肩部水平。", "顶端停顿一秒，避免身体后仰借力。", "控制哑铃缓慢回落至大腿前。"] },
+
+    { "match": "preacher curl", "id": "preacher-curl", "nameZh": "牧师凳弯举", "muscles": ["biceps"], "equipment": "dumbbell", "difficulty": "beginner",
+      "descriptionZh": "上臂固定于斜托垫完成弯举。肩屈肌与借力被完全排除，肱二头肌在拉伸位承受恒定负荷，孤立度极高的二头动作。",
+      "instructionsZh": ["坐姿上臂贴紧斜托垫，反握杠铃或哑铃。", "屈肘将重量弯举至顶端，二头肌完全收缩。", "挤压一秒。", "控制缓慢下放至手臂近完全伸展，保持张力不卸。"] },
+
+    { "match": "cable crunch", "id": "cable-crunch", "nameZh": "跪姿绳索卷腹", "muscles": ["core"], "equipment": "cable", "difficulty": "intermediate",
+      "descriptionZh": "跪姿持绳索于头后，以脊柱屈曲完成卷腹。附加负荷使腹直肌获得渐进超负荷可能，是腹肌增量的主力动作。",
+      "instructionsZh": ["跪于滑轮前，绳索握把置于头后两侧，髋部保持固定。", "以腹直肌收缩将躯干向大腿方向卷起，臀部略后坐。", "顶端挤压腹肌一秒，肘部向膝方向靠拢。", "控制躯干缓慢伸展还原，腹肌不完全松弛。"] },
+
+    { "match": "dumbbell shrug", "id": "db-shrug", "nameZh": "哑铃耸肩", "muscles": ["traps"], "equipment": "dumbbell", "difficulty": "beginner",
+      "descriptionZh": "站姿持哑铃完成肩胛上提。与杠铃耸肩等效但握持更自由，可在更大活动范围内挤压斜方肌上部。",
+      "instructionsZh": ["站姿持哑铃于体侧，双臂伸直。", "垂直上耸肩胛至最高点，不屈肘。", "顶端挤压斜方肌一秒。", "控制缓慢下降至肩胛完全放松。"] },
+
+    { "match": "assisted pull-up", "id": "assisted-pull-up", "nameZh": "辅助引体向上", "muscles": ["back", "biceps"], "equipment": "machine", "difficulty": "beginner",
+      "descriptionZh": "利用器械配重抵消部分体重完成引体向上模式。作为自重引体的进阶过渡，帮助建立背阔肌发力模式与基础力量。",
+      "instructionsZh": ["跪或站于辅助垫上，双手宽握横杆。", "肩胛下沉启动，以背阔肌发力将身体上拉至下颌过杆。", "顶端挤压背肌一秒。", "控制身体缓慢下降至完全伸展。"] },
+
+    { "match": "seated dumbbell press", "id": "seated-db-press", "nameZh": "坐姿哑铃推举", "muscles": ["shoulders", "triceps"], "equipment": "dumbbell", "difficulty": "beginner",
+      "descriptionZh": "背部有靠背支撑的哑铃推举变式。躯干稳定使三角肌可承受更大负荷，动作模式与站姿推举互补。",
+      "instructionsZh": ["坐姿背部贴靠凳面，双手持哑铃于肩侧。", "垂直向上推起至双臂近伸直。", "顶端三角肌完全收缩一秒。", "控制哑铃回落至肩侧。"] },
+
+    { "match": "cable lateral raise", "id": "cable-lateral-raise", "nameZh": "绳索侧平举", "muscles": ["shoulders"], "equipment": "cable", "difficulty": "beginner",
+      "descriptionZh": "单侧使用低位滑轮完成侧平举。绳索张力方向在动作全程垂直于三角肌中束纤维，起始位即有负荷，弥补哑铃侧平举底部无张力的缺陷。",
+      "instructionsZh": ["单手持握低位滑轮手柄，身体略侧倾建立张力。", "以三角肌中束发力沿弧线上举至肩高水平。", "顶端停顿一秒。", "控制手柄缓慢回落，保持张力。"] },
+
+    { "match": "chest supported row", "id": "chest-supported-row", "nameZh": "上斜凳俯身划船", "muscles": ["back", "biceps"], "equipment": "dumbbell", "difficulty": "beginner",
+      "descriptionZh": "俯卧于上斜凳完成划船。躯干完全由凳面支撑，下背与借力被排除，背阔肌与斜方肌中部在严格形态下受载。",
+      "instructionsZh": ["俯卧于上斜凳（30°–45°），双手持哑铃自然下垂。", "以背肌发力将哑铃拉向髋部两侧，肘部贴近躯干。", "顶端挤压肩胛一秒。", "控制哑铃缓慢下放至完全伸展。"] },
+
+    { "match": "reverse fly", "id": "reverse-fly", "nameZh": "俯身飞鸟", "muscles": ["shoulders", "back"], "equipment": "dumbbell", "difficulty": "beginner",
+      "descriptionZh": "俯身持哑铃完成水平外展。孤立刺激三角肌后束与斜方肌中部，是平衡推类训练量、改善圆肩的关键动作。",
+      "instructionsZh": ["屈髋俯身至躯干近乎平行地面，持哑铃自然下垂，掌心相对。", "以肩后束发力将哑铃沿弧线向两侧举至肩高水平，肘部微屈。", "顶端挤压肩后束与肩胛一秒。", "控制哑铃缓慢回落，全程避免耸肩与借力。"] },
+
+    { "match": "incline dumbbell curl", "id": "incline-db-curl", "nameZh": "上斜哑铃弯举", "muscles": ["biceps"], "equipment": "dumbbell", "difficulty": "beginner",
+      "descriptionZh": "仰卧于 45° 上斜凳、双臂自然下垂完成弯举。肩关节后伸使肱二头肌长头在最大拉伸位受载，是发展二头峰值的高阶变式。",
+      "instructionsZh": ["仰卧于上斜凳，双臂垂直下垂持哑铃，掌心朝前。", "屈肘将哑铃弯举至肩前，上臂保持固定不前移。", "顶端挤压二头肌一秒。", "控制缓慢下放至完全伸展。"] },
+
+    { "match": "overhead cable triceps extension", "id": "overhead-triceps-ext", "nameZh": "绳索过顶臂屈伸", "muscles": ["triceps"], "equipment": "cable", "difficulty": "beginner",
+      "descriptionZh": "背向低位滑轮、过顶屈伸肘关节。三头长头在肩屈位被拉长，与下压类动作互补，实现长头的完整刺激。",
+      "instructionsZh": ["背向滑轮，双手握绳索于头后，肘部指向前上方并固定。", "以前臂伸肘将绳索拉过头顶至双臂伸直。", "顶端挤压三头一秒。", "控制绳索缓慢回落至头后，肘位不漂移。"] },
+
+    { "match": "single leg press", "id": "single-leg-press", "nameZh": "单腿腿举", "muscles": ["quads", "glutes"], "equipment": "machine", "difficulty": "beginner",
+      "descriptionZh": "单腿置于平台完成腿举。消除双侧优势补偿，用于矫正左右腿力量不平衡及大负荷单侧安全训练。",
+      "instructionsZh": ["坐姿单脚置于平台中部，另一腿悬空。", "屈膝下降至膝约 90°，腰臀贴紧靠垫。", "以单腿蹬起至近伸直，不锁膝。", "控制缓慢回落，完成后换边。"] },
+
+    { "match": "dumbbell step-up", "id": "step-up", "nameZh": "哑铃箱上步", "muscles": ["quads", "glutes"], "equipment": "dumbbell", "difficulty": "beginner",
+      "descriptionZh": "单腿蹬上箱台。功能性单侧伸髋伸膝训练，与日常生活动作模式高度一致，同时提升单腿稳定性。",
+      "instructionsZh": ["持哑铃于体侧，面对高度约膝上方的箱台。", "单脚全脚踏上箱台，以该腿发力蹬直身体上台。", "顶端臀肌收紧，另一腿控制性放下。", "重复规定次数后换边。"] },
+
+    { "match": "good morning", "id": "good-morning", "nameZh": "早安式体前屈", "muscles": ["lower-back", "hamstrings", "glutes"], "equipment": "barbell", "difficulty": "intermediate",
+      "descriptionZh": "杠铃负于肩后完成髋铰链前屈。竖脊肌等长稳定、腘绳肌与臀肌动态伸展收缩，是后侧链柔韧与控制的高级训练。",
+      "instructionsZh": ["杠铃置于斜方肌上部，站距与髋同宽，膝微屈。", "保持背部平直，以髋为轴前屈至躯干约与地面平行。", "腘绳肌充分拉伸后，以臀腿发力伸髋站起。", "全程核心收紧，避免腰椎屈曲。"] },
+
+    { "match": "ab wheel rollout", "id": "ab-wheel", "nameZh": "健腹轮", "muscles": ["core"], "equipment": "other", "difficulty": "advanced",
+      "descriptionZh": "跪姿前推健腹轮伸展躯干再拉回。核心在极长力臂下抗伸展，是核心力量的高级等长训练，腰椎稳定能力要求极高。",
+      "instructionsZh": ["跪姿双手握轮于膝前，核心收紧，骨盆后倾。", "缓慢前推健腹轮，身体随之伸展，全程保持腰椎中立不塌陷。", "伸展至能力极限（或接近地面）即止。", "以腹肌发力将轮拉回起始跪姿。"] },
+
+    { "match": "kneeling squat jump", "id": "squat-jump", "nameZh": "自重纵跳深蹲", "muscles": ["quads", "glutes", "calves"], "equipment": "bodyweight", "difficulty": "intermediate",
+      "descriptionZh": "自蹲位爆发纵跳的增强式训练。发展下肢爆发功率与弹性力量，落地缓冲控制同样重要。",
+      "instructionsZh": ["半蹲位准备，双臂后摆蓄力。", "爆发蹬地纵跳，空中身体完全伸展。", "前脚掌落地屈膝缓冲，衔接下一次。", "保持节奏与落地质量。"] }
+  ]
+}

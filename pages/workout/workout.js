@@ -1,4 +1,5 @@
 import { Store } from '../../utils/store.js';
+import { syncLastHistory } from '../../utils/sync.js';
 
 Page({
   data: {
@@ -114,6 +115,7 @@ Page({
         success: function (res) {
           if (res.confirm) {
             Store.finishWorkout();
+            syncLastHistory(Store.state.history); // 登录时静默云同步
             self._refresh();
             if (rt && rt.switchTab) rt.switchTab({ url: '/pages/home/home' });
           }
@@ -121,6 +123,7 @@ Page({
       });
     } else {
       Store.finishWorkout();
+      syncLastHistory(Store.state.history);
       this._refresh();
     }
   },

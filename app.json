@@ -2,6 +2,7 @@
   "pages": [
     "pages/home/home",
     "pages/plan/plan",
+    "pages/plan-edit/plan-edit",
     "pages/workout/workout",
     "pages/library/library",
     "pages/history/history",

@@ -20,6 +20,6 @@
   </view>
 
   <view class="license-note">
-    <text class="muted">计划数据存储在本地，后端可用后支持多设备同步</text>
+    <text class="muted">计划保存于本地；登录后自动云同步</text>
   </view>
 </view>

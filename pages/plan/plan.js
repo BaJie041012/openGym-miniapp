@@ -32,9 +32,10 @@ Page({
   },
 
   editDay: function (e) {
+    var day = e.currentTarget.dataset.day;
     var rt = typeof qd !== 'undefined' ? qd : null;
-    if (rt && typeof rt.showToast === 'function') {
-      rt.showToast({ title: '编辑功能待后端', icon: 'none' });
+    if (rt && rt.navigateTo) {
+      rt.navigateTo({ url: '/pages/plan-edit/plan-edit?day=' + day });
     }
   }
 });
