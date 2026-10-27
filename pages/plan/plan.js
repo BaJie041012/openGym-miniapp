@@ -11,6 +11,8 @@ Page({
 
   onLoad: function () {
     Store.init();
+    // 云端数据启动时异步合并进 Store，到达后自动刷新（utils/sync.js pullCloud → Store.emit）
+    Store.on(this._refresh.bind(this));
     this._refresh();
   },
 

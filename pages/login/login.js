@@ -1,6 +1,5 @@
 import { Auth } from '../../utils/auth.js';
-import { getRoutine } from '../../utils/api.js';
-import { Store } from '../../utils/store.js';
+import { pullCloud } from '../../utils/sync.js';
 
 Page({
   data: {
@@ -14,7 +13,7 @@ Page({
     this.setData({ logged: !!s, nickname: (s && s.nickname) || '' });
   },
 
-  // 静默登录 → 登录成功后拉取云端计划合并到本地（云端非空条目优先）
+  // 静默登录 → 登录成功后拉取云端做双向合并（计划 + 训练记录，见 utils/sync.js）
   doLogin: function () {
     var self = this;
     if (this.data.logging) return;
@@ -26,22 +25,10 @@ Page({
         if (rt && rt.showToast) rt.showToast({ title: '登录失败，请重试', icon: 'none' });
         return;
       }
-      // 拉取云端计划：本地为空的天用云端数据填充（本地优先，避免覆盖）
-      getRoutine().then(function (cloud) {
-        if (cloud && cloud.days) {
-          for (var day in cloud.days) {
-            if (Object.prototype.hasOwnProperty.call(cloud.days, day)) {
-              var plans = cloud.days[day] || [];
-              var local = Store.state.routines[day] || [];
-              if (local.length === 0 && plans.length > 0) {
-                Store.setRoutine(day, plans);
-              }
-            }
-          }
-        }
+      pullCloud().then(function () {
         self.setData({ logged: true, nickname: sess.nickname || '', logging: false });
         var rt2 = typeof qd !== 'undefined' ? qd : null;
-        if (rt2 && rt2.showToast) rt2.showToast({ title: '登录成功', icon: 'none' });
+        if (rt2 && rt2.showToast) rt2.showToast({ title: '登录成功，数据已同步', icon: 'none' });
       });
     });
   },

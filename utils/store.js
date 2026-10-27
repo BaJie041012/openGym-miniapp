@@ -39,13 +39,30 @@ function defaultState() {
 
 export var Store = {
   state: null,
+  _listeners: [],
 
   init() {
-    this.state = loadState();
+    // 幂等：app.js onLaunch 已初始化，页面里重复调用不重读 storage（避免覆盖云同步合并中的 state）
+    if (!this.state) this.state = loadState();
   },
 
   persist() {
     if (this.state) saveState(this.state);
+  },
+
+  // 轻量事件：云端数据合并进 Store 后 emit，通知已打开的页面重新渲染
+  on(fn) {
+    if (typeof fn === 'function') this._listeners.push(fn);
+  },
+
+  off(fn) {
+    this._listeners = this._listeners.filter(function (f) { return f !== fn; });
+  },
+
+  emit() {
+    this._listeners.slice().forEach(function (fn) {
+      try { fn(); } catch (e) { /* 单个页面刷新失败不影响其他 */ }
+    });
   },
 
   // 训练会话
