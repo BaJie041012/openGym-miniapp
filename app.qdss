@@ -178,7 +178,19 @@ page {
 .selected-meta { font-size: 12px; color: #888899; margin-right: 10px; }
 .selected-remove { font-size: 12px; color: #e74c3c; }
 .exercise-card { display: block; }
-.save-btn { margin-top: 14px; margin-bottom: 24px; }
+/* plan-edit 保存按钮悬浮屏幕底部（页面预留空间防遮挡，适配底部安全区） */
+.page-edit { padding-bottom: 96px; }
+.save-btn {
+  position: fixed;
+  left: 14px;
+  right: 14px;
+  bottom: 16px;
+  bottom: calc(16px + constant(safe-area-inset-bottom));
+  bottom: calc(16px + env(safe-area-inset-bottom));
+  z-index: 10;
+  margin: 0;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+}
 
 /* === 底部通用 === */
 .license-note { text-align: center; margin-top: 16px; }
