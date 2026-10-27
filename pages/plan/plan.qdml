@@ -1,5 +1,8 @@
 <view class="page">
-  <text class="title">本周计划</text>
+  <view class="page-head-row">
+    <text class="title">本周计划</text>
+    <view class="btn btn-secondary import-btn" bindtap="importPreset">📋 导入预设</view>
+  </view>
   <text class="subtitle">点击某天查看或编辑训练内容</text>
 
   <view wx:for="{{weekdays}}" wx:key="id" class="card day-card">

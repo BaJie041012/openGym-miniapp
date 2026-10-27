@@ -161,7 +161,7 @@ async function main() {
       difficulty: zh ? zh.difficulty : '',
       textSource: String(it.textSource || '').trim(),
     };
-  });
+  }).filter(d => d.exerciseId && d.name); // 原库存在 name 为空的脏数据（如 0004），过滤掉
   const missing = curated.filter(c => !matched.has(c.id)).map(c => `${c.id} (${c.match})`);
   console.log(`[seed] 精选匹配: ${matched.size}/${curated.length}` + (missing.length ? `；未命中: ${missing.join(', ')}` : ''));
 

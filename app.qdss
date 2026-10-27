@@ -140,6 +140,22 @@ page {
 .bar { width: 20px; background: #4ECDC4; border-radius: 2px 2px 0 0; min-height: 2px; }
 .bar-label { font-size: 11px; color: #888899; margin-top: 4px; }
 
+/* 统计页增强：本周对比 / 周趋势 / 肌群分布 / TOP5 */
+.cmp-row { display: flex; margin-top: 10px; }
+.cmp-item { flex: 1; text-align: center; }
+.cmp-num { font-size: 18px; font-weight: 700; color: #4ECDC4; display: block; margin-bottom: 4px; }
+.bars-week { height: 84px; }
+.bars-week .bar { width: 14px; }
+.mus-row { display: flex; align-items: center; margin-top: 10px; }
+.mus-name { width: 52px; font-size: 12px; color: #e0e0e0; flex-shrink: 0; }
+.mus-track { flex: 1; height: 8px; background: rgba(255,255,255,0.08); border-radius: 4px; overflow: hidden; }
+.mus-fill { height: 8px; background: #4ECDC4; border-radius: 4px; }
+.mus-pct { width: 96px; text-align: right; font-size: 11px; color: #888899; flex-shrink: 0; }
+.top-row { display: flex; align-items: center; margin-top: 10px; }
+.top-rank { width: 22px; font-size: 14px; font-weight: 700; color: #4ECDC4; flex-shrink: 0; }
+.top-name { flex: 1; font-size: 13px; color: #e0e0e0; }
+.top-vol { font-size: 11px; color: #888899; flex-shrink: 0; }
+
 /* === settings 页面 === */
 .setting-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
 .setting-row:last-child { border-bottom: none; }
@@ -148,6 +164,8 @@ page {
 .seg-active { background: #4ECDC4; color: #1a1a2e; }
 
 /* === plan-edit 编辑页 === */
+.page-head-row { display: flex; justify-content: space-between; align-items: center; }
+.import-btn { padding: 6px 12px; font-size: 12px; }
 .selected-row { display: flex; align-items: center; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
 .selected-row:last-child { border-bottom: none; }
 .selected-name { font-size: 14px; color: #eaeaea; flex: 1; }
