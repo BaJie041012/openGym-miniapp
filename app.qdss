@@ -38,6 +38,12 @@ page {
   color: #4ECDC4;
 }
 
+/* 今日已练完的完成态按钮（仍可点击加练） */
+.btn-done {
+  background-color: rgba(78, 205, 196, 0.15);
+  color: #4ECDC4;
+}
+
 .tap {
   opacity: 0.7;
 }

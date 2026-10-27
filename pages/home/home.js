@@ -7,6 +7,7 @@ Page({
     todaysRoutine: [],
     activeFlag: false,
     activeExerciseName: '',
+    todayDone: false,
     recentHistory: []
   },
 
@@ -25,11 +26,18 @@ Page({
     var dayNames = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
     var dayKey = dayNames[d.getDay()];
     var weekDays = ['周日','周一','周二','周三','周四','周五','周六'];
+    // 今日是否已有完成的训练（日历日起止）
+    var dayStart = new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
+    var dayEnd = dayStart + 86400000;
+    var todayDone = (state.history || []).some(function (h) {
+      return h.startedAt >= dayStart && h.startedAt < dayEnd;
+    });
     this.setData({
       todayLabel: (d.getMonth() + 1) + '月' + d.getDate() + '日 · ' + weekDays[d.getDay()],
       todaysRoutine: state.routines[dayKey] || [],
       hasRoutine: (state.routines[dayKey] || []).length > 0,
       activeFlag: !!state.active,
+      todayDone: todayDone,
       activeExerciseName: state.active && state.active.exercises
         ? (state.active.exercises[state.active.currentExerciseIndex] || {}).name || '训练中'
         : '',

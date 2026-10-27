@@ -22,7 +22,7 @@
           </view>
         </view>
       </view>
-      <view wx:if="{{!activeFlag}}" class="btn" bindtap="startToday">开始今日训练</view>
+      <view wx:if="{{!activeFlag}}" class="btn {{todayDone ? 'btn-done' : ''}}" bindtap="startToday">{{todayDone ? '✓ 今日已完成 · 点击加练' : '开始今日训练'}}</view>
     </block>
     <text wx:else class="muted">没有安排训练，好好休息</text>
   </view>
