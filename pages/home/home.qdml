@@ -1,0 +1,41 @@
+<view class="page">
+  <view class="hero">
+    <text class="hero-greeting">今天是</text>
+    <text class="hero-date">{{todayLabel}}</text>
+  </view>
+
+  <view wx:if="{{activeFlag}}" class="card card-active" bindtap="goWorkout">
+    <text class="card-label">训练进行中</text>
+    <text class="card-title">继续 {{activeExerciseName}}</text>
+    <text class="card-hint">点击返回训练</text>
+  </view>
+
+  <view class="card">
+    <text class="title">{{hasRoutine ? '今日训练' : '今日休息日'}}</text>
+    <block wx:if="{{hasRoutine}}">
+      <view class="exercise-list">
+        <view wx:for="{{todaysRoutine}}" wx:key="name" class="exercise-item">
+          <text class="exercise-idx">{{index + 1}}</text>
+          <view class="exercise-info">
+            <text class="exercise-name">{{item.name}}</text>
+            <text class="muted">{{item.sets || 3}} × {{item.reps || 10}}</text>
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{!activeFlag}}" class="btn {{todayDone ? 'btn-done' : ''}}" bindtap="startToday">{{todayDone ? '✓ 今日已完成 · 点击加练' : '开始今日训练'}}</view>
+    </block>
+    <text wx:else class="muted">没有安排训练，好好休息</text>
+  </view>
+
+  <view wx:if="{{recentHistory.length > 0}}" class="card">
+    <text class="title">最近训练</text>
+    <view wx:for="{{recentHistory}}" wx:key="startedAt" class="history-row">
+      <text class="history-date">{{item.dateLabel}}</text>
+      <text class="muted">{{item.exerciseCount}} 个动作</text>
+    </view>
+  </view>
+
+  <view class="license-note">
+    <text class="muted">openGym · AGPL-3.0 · Gym visual 媒体已剥离</text>
+  </view>
+</view>

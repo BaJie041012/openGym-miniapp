@@ -1,0 +1,18 @@
+<view class="page">
+  <view class="card">
+    <text class="title">openGym</text>
+    <text class="subtitle">自托管健身追踪</text>
+
+    <block wx:if="{{!logged}}">
+      <view class="btn" style="margin-top: 24px" bindtap="doLogin">{{logging ? '登录中…' : '一键登录（千岛账号）'}}</view>
+      <view class="btn btn-secondary" style="margin-top: 12px" bindtap="guestMode">以游客身份使用</view>
+      <text class="muted" style="margin-top: 16px; text-align: center; display: block;">登录后计划与训练记录多设备云同步</text>
+    </block>
+
+    <block wx:else>
+      <text class="muted" style="margin-top: 24px; text-align: center; display: block;">当前登录：{{nickname}}</text>
+      <view class="btn btn-secondary" style="margin-top: 12px" bindtap="logout">退出登录</view>
+      <view class="btn" style="margin-top: 12px" bindtap="guestMode">进入 openGym</view>
+    </block>
+  </view>
+</view>

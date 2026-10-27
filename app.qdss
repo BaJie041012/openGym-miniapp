@@ -1,0 +1,196 @@
+/* openGym · 全局样式（原生 EMP · qdss）
+   单位说明：小程序 px = 逻辑像素（375pt 屏宽），1px ≈ 2rpx
+   规范：正文 14px(28rpx) · 标题 18px(36rpx) · 辅助 12px(24rpx) */
+page {
+  background-color: #1a1a2e;
+  color: #eaeaea;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.page {
+  min-height: 100vh;
+  padding: 14px;
+  padding-bottom: 24px;
+  box-sizing: border-box;
+}
+
+.card {
+  background-color: #16213e;
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 10px;
+}
+
+.btn {
+  background-color: #4ECDC4;
+  color: #ffffff;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-weight: 600;
+  font-size: 15px;
+  text-align: center;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border: 1px solid #4ECDC4;
+  color: #4ECDC4;
+}
+
+/* 今日已练完的完成态按钮（仍可点击加练） */
+.btn-done {
+  background-color: rgba(78, 205, 196, 0.15);
+  color: #4ECDC4;
+}
+
+.tap {
+  opacity: 0.7;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #888899;
+}
+
+.muted {
+  font-size: 12px;
+  color: #666688;
+}
+
+/* === home 页面 === */
+.hero { text-align: center; margin-bottom: 16px; }
+.hero-greeting { display: block; color: #888899; font-size: 13px; }
+.hero-date { display: block; font-size: 24px; font-weight: 700; color: #4ECDC4; margin-top: 4px; }
+.card-active { border: 1px solid #4ECDC4; }
+.card-label { color: #4ECDC4; font-size: 12px; display: block; margin-bottom: 4px; }
+.card-title { font-size: 17px; font-weight: 700; display: block; margin-bottom: 4px; }
+.card-hint { color: #888899; font-size: 12px; }
+.exercise-list { margin-top: 12px; }
+.exercise-item { display: flex; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.exercise-item:last-child { border-bottom: none; }
+.exercise-idx { width: 28px; height: 28px; border-radius: 50%; background: rgba(78,205,196,0.15); color: #4ECDC4; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; margin-right: 10px; flex-shrink: 0; }
+.exercise-info { flex: 1; }
+.history-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.history-row:last-child { border-bottom: none; }
+
+/* exercise-name：home 列表与 library 卡片共用 */
+.exercise-name { display: block; font-size: 15px; font-weight: 700; color: #fff; }
+
+/* history-date：home 最近训练行与 history 页标题共用 */
+.history-date { display: block; font-size: 14px; font-weight: 600; color: #4ECDC4; margin-bottom: 2px; }
+
+/* === plan 页面 === */
+.day-head { display: flex; justify-content: space-between; align-items: center; }
+.day-name { font-size: 16px; font-weight: 600; color: #eaeaea; }
+.day-name-today { color: #4ECDC4; }
+.day-count { color: #888899; font-size: 12px; }
+.preview { margin-top: 10px; }
+.preview-item { display: flex; align-items: center; padding: 4px 0; font-size: 13px; color: #ccccdd; }
+.preview-bullet { color: #4ECDC4; margin-right: 8px; }
+.edit-btn { margin-top: 10px; text-align: center; }
+
+/* === workout 页面 === */
+.exercise-nav { display: flex; justify-content: center; gap: 6px; }
+.nav-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.15); }
+.nav-dot-current { background: #4ECDC4; width: 12px; height: 12px; }
+.nav-dot-done { background: #2ecc71; }
+.sets { margin-top: 12px; }
+.set-row { display: flex; justify-content: space-between; padding: 8px 0; color: #ccccdd; font-size: 13px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.input-row { display: flex; gap: 12px; margin-top: 12px; }
+.input-block { flex: 1; }
+.input { background: rgba(255,255,255,0.08); border: none; border-radius: 6px; padding: 10px; font-size: 14px; color: #eaeaea; margin-top: 6px; width: 100%; box-sizing: border-box; }
+.timer { text-align: center; margin-top: 14px; padding: 12px; background: rgba(78,205,196,0.1); border-radius: 8px; }
+.timer-label { display: block; color: #888899; font-size: 11px; }
+.timer-display { display: block; font-size: 34px; font-weight: 700; color: #4ECDC4; }
+.timer-controls { display: flex; gap: 10px; justify-content: center; margin-top: 8px; }
+.nav-actions { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+.nav-actions .btn { flex: 1; min-width: 80px; text-align: center; }
+
+/* === library 页面 === */
+.filter-row { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
+.filter-chip { padding: 5px 12px; border-radius: 12px; font-size: 12px; background: rgba(255,255,255,0.08); color: #ccccdd; }
+.filter-chip-active { background: #4ECDC4; color: #1a1a2e; }
+.exercise-meta { display: flex; gap: 6px; margin: 6px 0; }
+.meta-tag { font-size: 11px; padding: 2px 7px; border-radius: 4px; background: rgba(255,255,255,0.1); color: #ccccdd; text-transform: capitalize; }
+.meta-easy { background: rgba(46,204,113,0.2); color: #2ecc71; }
+.meta-hard { background: rgba(231,76,60,0.2); color: #e74c3c; }
+.muscle-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
+.muscle-tag { font-size: 10px; padding: 1px 6px; border-radius: 8px; background: rgba(78,205,196,0.15); color: #4ECDC4; }
+.exercise-desc { color: #ccccdd; font-size: 13px; line-height: 1.6; }
+.steps { margin-top: 10px; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 8px; }
+.step-row { display: flex; align-items: flex-start; padding: 4px 0; }
+.step-idx { width: 16px; height: 16px; border-radius: 50%; background: rgba(78,205,196,0.15); color: #4ECDC4; font-size: 10px; display: flex; align-items: center; justify-content: center; margin-right: 8px; flex-shrink: 0; margin-top: 2px; }
+.step-text { font-size: 12px; color: #bbbbcc; line-height: 1.6; flex: 1; }
+.media-banner { margin-top: 10px; padding: 8px; background: rgba(231,76,60,0.1); border-left: 3px solid #e74c3c; font-size: 11px; color: #e74c3c; }
+
+/* === history 页面 === */
+.volume-row { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; padding-top: 6px; border-top: 1px solid rgba(78,205,196,0.3); }
+.volume-num { font-size: 15px; font-weight: 700; color: #4ECDC4; }
+
+/* === stats 页面 === */
+.stats-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.stat-card { flex: 1 1 40%; min-width: 90px; background: #16213e; border-radius: 8px; padding: 12px; text-align: center; }
+.stat-num { font-size: 20px; font-weight: 700; color: #4ECDC4; display: block; }
+.stat-label { font-size: 11px; color: #888899; }
+.bars { display: flex; justify-content: space-between; align-items: flex-end; height: 90px; margin-top: 8px; padding: 0 4px; }
+.bar-col { display: flex; flex-direction: column; align-items: center; flex: 1; }
+.bar { width: 20px; background: #4ECDC4; border-radius: 2px 2px 0 0; min-height: 2px; }
+.bar-label { font-size: 11px; color: #888899; margin-top: 4px; }
+
+/* 统计页增强：本周对比 / 周趋势 / 肌群分布 / TOP5 */
+.cmp-row { display: flex; margin-top: 10px; }
+.cmp-item { flex: 1; text-align: center; }
+.cmp-num { font-size: 18px; font-weight: 700; color: #4ECDC4; display: block; margin-bottom: 4px; }
+.bars-week { height: 84px; }
+.bars-week .bar { width: 14px; }
+.mus-row { display: flex; align-items: center; margin-top: 10px; }
+.mus-name { width: 52px; font-size: 12px; color: #e0e0e0; flex-shrink: 0; }
+.mus-track { flex: 1; height: 8px; background: rgba(255,255,255,0.08); border-radius: 4px; overflow: hidden; }
+.mus-fill { height: 8px; background: #4ECDC4; border-radius: 4px; }
+.mus-pct { width: 96px; text-align: right; font-size: 11px; color: #888899; flex-shrink: 0; }
+.top-row { display: flex; align-items: center; margin-top: 10px; }
+.top-rank { width: 22px; font-size: 14px; font-weight: 700; color: #4ECDC4; flex-shrink: 0; }
+.top-name { flex: 1; font-size: 13px; color: #e0e0e0; }
+.top-vol { font-size: 11px; color: #888899; flex-shrink: 0; }
+
+/* === settings 页面 === */
+.setting-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.setting-row:last-child { border-bottom: none; }
+.seg { display: flex; background: rgba(255,255,255,0.08); border-radius: 6px; padding: 2px; }
+.seg-item { padding: 7px 14px; border-radius: 5px; color: #ccccdd; font-size: 13px; }
+.seg-active { background: #4ECDC4; color: #1a1a2e; }
+
+/* === plan-edit 编辑页 === */
+.page-head-row { display: flex; justify-content: space-between; align-items: center; }
+.import-btn { padding: 6px 12px; font-size: 12px; }
+.selected-row { display: flex; align-items: center; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.selected-row:last-child { border-bottom: none; }
+.selected-name { font-size: 14px; color: #eaeaea; flex: 1; }
+.selected-meta { font-size: 12px; color: #888899; margin-right: 10px; }
+.selected-remove { font-size: 12px; color: #e74c3c; }
+.exercise-card { display: block; }
+/* plan-edit 保存按钮悬浮屏幕底部（页面预留空间防遮挡，适配底部安全区） */
+.page-edit { padding-bottom: 96px; }
+.save-btn {
+  position: fixed;
+  left: 14px;
+  right: 14px;
+  bottom: 16px;
+  bottom: calc(16px + constant(safe-area-inset-bottom));
+  bottom: calc(16px + env(safe-area-inset-bottom));
+  z-index: 10;
+  margin: 0;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+}
+
+/* === 底部通用 === */
+.license-note { text-align: center; margin-top: 16px; }

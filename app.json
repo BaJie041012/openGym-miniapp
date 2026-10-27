@@ -1,0 +1,36 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/plan/plan",
+    "pages/plan-edit/plan-edit",
+    "pages/workout/workout",
+    "pages/library/library",
+    "pages/history/history",
+    "pages/stats/stats",
+    "pages/settings/settings",
+    "pages/login/login"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#1a1a2e",
+    "navigationBarTitleText": "openGym",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#1a1a2e"
+  },
+  "tabBar": {
+    "color": "#888899",
+    "selectedColor": "#4ECDC4",
+    "backgroundColor": "#16213e",
+    "borderStyle": "black",
+    "fontSize": "16px",
+    "list": [
+      { "pagePath": "pages/home/home", "text": "今日" },
+      { "pagePath": "pages/plan/plan", "text": "计划" },
+      { "pagePath": "pages/workout/workout", "text": "训练" },
+      { "pagePath": "pages/library/library", "text": "动作库" },
+      { "pagePath": "pages/settings/settings", "text": "设置" }
+    ]
+  },
+  "requiredPrivateInfos": [],
+  "permission": {}
+}

@@ -1,0 +1,82 @@
+<view class="page">
+  <text class="title">训练统计</text>
+
+  <view class="stats-grid">
+    <view class="stat-card">
+      <text class="stat-num">{{totalSessions}}</text>
+      <text class="stat-label">总训练次数</text>
+    </view>
+    <view class="stat-card">
+      <text class="stat-num">{{totalVolume}}</text>
+      <text class="stat-label">总训练量 (kg)</text>
+    </view>
+    <view class="stat-card">
+      <text class="stat-num">{{totalMinutes}}</text>
+      <text class="stat-label">总训练时长 (分钟)</text>
+    </view>
+    <view class="stat-card">
+      <text class="stat-num">{{currentStreak}}</text>
+      <text class="stat-label">连续训练天数</text>
+    </view>
+  </view>
+
+  <view class="card">
+    <text class="subtitle">本周对比</text>
+    <view class="cmp-row">
+      <view class="cmp-item">
+        <text class="cmp-num">{{thisWeekVol}}</text>
+        <text class="stat-label">本周训练量 (kg)</text>
+      </view>
+      <view class="cmp-item">
+        <text class="cmp-num">{{lastWeekVol}}</text>
+        <text class="stat-label">上周训练量 (kg)</text>
+      </view>
+      <view class="cmp-item">
+        <text class="cmp-num">{{weekDelta}}</text>
+        <text class="stat-label">环比变化</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="card">
+    <text class="subtitle">近 7 天训练量</text>
+    <view class="bars">
+      <view wx:for="{{weekBars}}" wx:key="day" class="bar-col">
+        <view class="bar" style="height: {{item.height}}px"></view>
+        <text class="bar-label">{{item.label}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="card">
+    <text class="subtitle">近 8 周训练量</text>
+    <view class="bars bars-week">
+      <view wx:for="{{weeklyBars}}" wx:key="label" class="bar-col">
+        <view class="bar" style="height: {{item.height}}px"></view>
+        <text class="bar-label">{{item.label}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="card" wx:if="{{muscleDist.length}}">
+    <text class="subtitle">肌群容量分布</text>
+    <view wx:for="{{muscleDist}}" wx:key="name" class="mus-row">
+      <text class="mus-name">{{item.name}}</text>
+      <view class="mus-track"><view class="mus-fill" style="width: {{item.width}}%"></view></view>
+      <text class="mus-pct">{{item.volText}} · {{item.pct}}%</text>
+    </view>
+  </view>
+
+  <view class="card" wx:if="{{topExercises.length}}">
+    <text class="subtitle">常练动作 TOP5</text>
+    <view wx:for="{{topExercises}}" wx:key="name" class="top-row">
+      <text class="top-rank">{{index + 1}}</text>
+      <text class="top-name">{{item.name}}</text>
+      <text class="top-vol">{{item.volText}}</text>
+    </view>
+  </view>
+
+  <view class="card" wx:if="{{!historyCount}}">
+    <text class="muted">暂无训练记录，完成一次训练后这里会出现数据</text>
+  </view>
+</view>

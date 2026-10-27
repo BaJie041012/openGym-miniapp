@@ -1,0 +1,6 @@
+.setting-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.setting-row:last-child { border-bottom: none; }
+
+.seg { display: flex; background: rgba(255,255,255,0.08); border-radius: 8px; padding: 4px; }
+.seg-item { padding: 10px 22px; border-radius: 6px; color: #ccccdd; font-size: 24px; }
+.seg-active { background: #4ECDC4; color: #1a1a2e; }

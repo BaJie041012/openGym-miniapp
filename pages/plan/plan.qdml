@@ -1,0 +1,28 @@
+<view class="page">
+  <view class="page-head-row">
+    <text class="title">本周计划</text>
+    <view class="btn btn-secondary import-btn" bindtap="importPreset">📋 导入预设</view>
+  </view>
+  <text class="subtitle">点击某天查看或编辑训练内容</text>
+
+  <view wx:for="{{weekdays}}" wx:key="id" class="card day-card">
+    <view class="day-head">
+      <text class="day-name {{item.today ? 'day-name-today' : ''}}">{{item.label}}</text>
+      <text wx:if="{{item.count > 0}}" class="day-count">{{item.count}} 个动作</text>
+      <text wx:else class="muted">休息日</text>
+    </view>
+    <view wx:if="{{item.exercises.length > 0}}" class="preview">
+      <view wx:for="{{item.exercises}}" wx:for-item="ex" wx:key="name" class="preview-item">
+        <text class="preview-bullet">•</text>
+        <text>{{ex.name}}</text>
+      </view>
+    </view>
+    <view class="btn btn-secondary edit-btn" bindtap="editDay" data-day="{{item.id}}">
+      {{item.count > 0 ? '编辑' : '添加'}}
+    </view>
+  </view>
+
+  <view class="license-note">
+    <text class="muted">计划保存于本地；登录后自动云同步</text>
+  </view>
+</view>

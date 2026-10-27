@@ -1,0 +1,37 @@
+<view class="page">
+  <text class="title">动作库</text>
+  <text class="muted" style="margin-top: 8px; display: block">{{exercises.length}} 个精选动作 · 全库可搜索</text>
+
+  <view class="filter-row">
+    <view wx:for="{{filters}}" wx:key="id"
+          class="filter-chip {{activeFilter === item.id ? 'filter-chip-active' : ''}}"
+          bindtap="selectFilter" data-id="{{item.id}}">
+      {{item.label}}
+    </view>
+  </view>
+
+  <view wx:for="{{filtered}}" wx:key="id" class="card">
+    <text class="exercise-name">{{item.name}}</text>
+    <text class="muted">{{item.nameEn}}</text>
+    <view class="exercise-meta">
+      <text class="meta-tag">{{item.equipmentLabel}}</text>
+      <text class="meta-tag {{item.difficulty === 'advanced' ? 'meta-hard' : (item.difficulty === 'beginner' ? 'meta-easy' : '')}}">
+        {{item.difficultyLabel}}
+      </text>
+    </view>
+    <view class="muscle-tags">
+      <text wx:for="{{item.muscleNames}}" wx:for-item="m" wx:key="*this" class="muscle-tag">{{m}}</text>
+    </view>
+    <text class="exercise-desc">{{item.description}}</text>
+    <view wx:if="{{item.steps.length > 0}}" class="steps">
+      <view wx:for="{{item.steps}}" wx:for-item="step" wx:for-index="si" wx:key="*this" class="step-row">
+        <text class="step-idx">{{si + 1}}</text>
+        <text class="step-text">{{step}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="license-note">
+    <text class="muted">动作文本 AGPL-3.0 / MIT · 全量 6500+ 动作已入库后端，登录后可检索</text>
+  </view>
+</view>

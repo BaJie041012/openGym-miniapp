@@ -1,0 +1,32 @@
+<view class="page">
+  <view class="card">
+    <text class="title">偏好设置</text>
+
+    <view class="setting-row">
+      <text>重量单位</text>
+      <view class="seg">
+        <view class="seg-item {{unit === 'kg' ? 'seg-active' : ''}}" bindtap="setUnit" data-v="kg">kg</view>
+        <view class="seg-item {{unit === 'lb' ? 'seg-active' : ''}}" bindtap="setUnit" data-v="lb">lb</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card">
+    <text class="title">数据</text>
+    <text class="muted">所有训练数据存储在本地。后端上线后支持同步。</text>
+    <view class="btn btn-secondary" bindtap="showClearConfirm">清除所有数据</view>
+  </view>
+
+  <view class="card">
+    <text class="title">关于</text>
+    <text class="muted">openGym — 自托管健身追踪小程序</text>
+    <text class="muted">版本 1.0.0</text>
+    <text class="muted">仓库：github.com/BaJie041012/openGym-miniapp</text>
+  </view>
+
+  <view class="card">
+    <text class="title">开源许可</text>
+    <text class="muted">本项目基于 GNU AGPL-3.0 发布。如需商用或后端托管场景，请确认 AGPL §7 App Store 例外覆盖千岛小程序平台。</text>
+    <text class="muted">原项目 openGym © Duarte Santos 2023-2025。</text>
+  </view>
+</view>

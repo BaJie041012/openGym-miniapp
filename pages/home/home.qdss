@@ -1,0 +1,29 @@
+.hero { text-align: center; margin-bottom: 24px; }
+.hero-greeting { display: block; color: #888899; font-size: 22px; }
+.hero-date { display: block; font-size: 34px; font-weight: 700; color: #4ECDC4; margin-top: 6px; }
+
+.card-active { border: 2px solid #4ECDC4; }
+.card-label { color: #4ECDC4; font-size: 22px; display: block; margin-bottom: 6px; }
+.card-title { font-size: 28px; font-weight: 700; display: block; margin-bottom: 6px; }
+.card-hint { color: #888899; font-size: 20px; }
+
+.exercise-list { margin-top: 20px; }
+.exercise-item { display: flex; align-items: center; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.exercise-item:last-child { border-bottom: none; }
+.exercise-idx {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: rgba(78,205,196,0.15); color: #4ECDC4;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 22px; margin-right: 14px;
+}
+.exercise-info { flex: 1; }
+.exercise-name { display: block; font-size: 26px; color: #fff; }
+
+.history-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.history-row:last-child { border-bottom: none; }
+.history-date { font-size: 24px; color: #eaeaea; }
+
+.license-note { text-align: center; margin-top: 32px; }

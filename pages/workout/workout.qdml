@@ -1,0 +1,54 @@
+<view class="page">
+  <view wx:if="{{!activeFlag}}" class="card">
+    <text class="title">没有进行中的训练</text>
+    <text class="subtitle">切换到「今日」或「计划」页开始训练</text>
+    <view class="btn" bindtap="goHome">返回今日</view>
+  </view>
+
+  <view wx:else class="card">
+    <view class="exercise-nav">
+      <view wx:for="{{exerciseCount}}" wx:key="*this"
+            class="nav-dot {{index === currentIdx ? 'nav-dot-current' : (index < currentIdx ? 'nav-dot-done' : '')}}"
+            bindtap="jumpTo" data-idx="{{index}}" />
+    </view>
+
+    <text class="title" style="margin-top: 24px">{{currentExercise.name}}</text>
+    <text class="muted" wx:if="{{currentExercise.muscles}}">{{currentExercise.musclesText}}</text>
+
+    <view wx:if="{{currentSets.length > 0}}" class="sets">
+      <text class="subtitle">已完成组数</text>
+      <view wx:for="{{currentSets}}" wx:key="at" class="set-row">
+        <text>第 {{index + 1}} 组</text>
+        <text>{{item.weight}} kg × {{item.reps}}</text>
+      </view>
+    </view>
+
+    <view class="input-row">
+      <view class="input-block">
+        <text class="muted">重量 (kg)</text>
+        <input class="input" type="number" value="{{weight}}" bindinput="onWeightInput" placeholder="0" />
+      </view>
+      <view class="input-block">
+        <text class="muted">次数</text>
+        <input class="input" type="number" value="{{reps}}" bindinput="onRepsInput" placeholder="0" />
+      </view>
+    </view>
+
+    <view class="btn" style="margin-top: 24px" bindtap="logSet">记录这一组</view>
+
+    <view class="timer">
+      <text class="timer-label">组间休息</text>
+      <text class="timer-display">{{restTime}}</text>
+      <view class="timer-controls">
+        <view class="btn btn-secondary" bindtap="startRest" data-sec="90">90s</view>
+        <view class="btn btn-secondary" bindtap="startRest" data-sec="180">3m</view>
+      </view>
+    </view>
+
+    <view class="nav-actions">
+      <view wx:if="{{currentIdx > 0}}" class="btn btn-secondary" bindtap="prevExercise">上一个</view>
+      <view wx:if="{{currentIdx < exerciseCount - 1}}" class="btn" bindtap="nextExercise">下一个</view>
+      <view class="btn btn-secondary" bindtap="finishWorkout">结束训练</view>
+    </view>
+  </view>
+</view>

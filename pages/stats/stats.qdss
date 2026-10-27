@@ -1,0 +1,13 @@
+.stats-grid { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 20px; }
+.stat-card {
+  flex: 1 1 40%; min-width: 140px;
+  background: #16213e; border-radius: 12px; padding: 18px;
+  text-align: center;
+}
+.stat-num { font-size: 32px; font-weight: 700; color: #4ECDC4; display: block; }
+.stat-label { font-size: 18px; color: #888899; }
+
+.bars { display: flex; justify-content: space-between; align-items: flex-end; height: 140px; margin-top: 14px; padding: 0 8px; }
+.bar-col { display: flex; flex-direction: column; align-items: center; flex: 1; }
+.bar { width: 32px; background: #4ECDC4; border-radius: 4px 4px 0 0; min-height: 2px; }
+.bar-label { font-size: 18px; color: #888899; margin-top: 6px; }

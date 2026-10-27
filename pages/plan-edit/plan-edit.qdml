@@ -1,0 +1,33 @@
+<view class="page page-edit">
+  <text class="title">{{dayLabel}} · 编辑</text>
+  <text class="subtitle">点击动作加入计划，再点已选动作移除</text>
+
+  <view class="card">
+    <text class="card-label">已选（{{selected.length}}）</text>
+    <view wx:if="{{selected.length === 0}}" class="muted">还没有动作，从下方选择</view>
+    <view wx:for="{{selected}}" wx:key="exerciseId" class="selected-row" bindtap="removeSelected" data-idx="{{index}}">
+      <text class="selected-name">{{item.name}}</text>
+      <text class="selected-meta">{{item.sets}} × {{item.reps}}</text>
+      <text class="selected-remove">移除</text>
+    </view>
+  </view>
+
+  <view class="filter-row">
+    <view wx:for="{{filters}}" wx:key="id"
+          class="filter-chip {{activeFilter === item.id ? 'filter-chip-active' : ''}}"
+          bindtap="selectFilter" data-id="{{item.id}}">
+      {{item.label}}
+    </view>
+  </view>
+
+  <view wx:for="{{filtered}}" wx:key="id" class="card exercise-card" bindtap="addExercise" data-idx="{{index}}">
+    <text class="exercise-name">{{item.name}}</text>
+    <text class="muted">{{item.nameEn}}</text>
+    <view class="muscle-tags">
+      <text wx:for="{{item.muscleNames}}" wx:for-item="m" wx:key="*this" class="muscle-tag">{{m}}</text>
+    </view>
+    <text class="exercise-desc">{{item.description}}</text>
+  </view>
+
+  <view class="btn save-btn" bindtap="savePlan">保存{{selected.length > 0 ? '（' + selected.length + ' 个动作）' : ''}}</view>
+</view>
