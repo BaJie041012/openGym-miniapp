@@ -19,7 +19,7 @@
       <text class="btn-icon">⚙️</text>
       <view class="btn-text">
         <view class="btn-title">管理账号</view>
-        <view class="btn-sub">创建 / 删除玩家账号 · 登录界面右上角「玩家账号：******」</view>
+        <view class="btn-sub">创建 / 删除玩家账号</view>
       </view>
     </view>
 
@@ -46,6 +46,7 @@
       <text class="sub-title">管理账号</text>
       <text class="back-btn" bindtap="closeManage">返回</text>
     </view>
+    <view class="manage-tip">提示：在登录界面右上角的「玩家账号：******」就是你要填入的数字</view>
     <view class="create-row">
       <button class="create-btn" bindtap="createPlayer">+ 创建玩家账号</button>
     </view>
