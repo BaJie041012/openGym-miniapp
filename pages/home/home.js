@@ -31,12 +31,16 @@ Page({
 
   onLoad: function () {
     var self = this;
-    // 先立即刷一次（可能已有旧 session），同时等登录完成后再刷
+    // 等登录完成后再刷昵称 + 拉玩家账号
     self._refreshAuth();
     if (Auth.ready) {
-      Auth.ready().then(function () { self._refreshAuth(); });
+      Auth.ready().then(function () {
+        self._refreshAuth();
+        self._loadPlayers();
+      });
+    } else {
+      self._loadPlayers();
     }
-    self._loadPlayers();
   },
 
   onShow: function () {
