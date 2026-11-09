@@ -29,6 +29,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 	"strings"
 	"time"
@@ -253,9 +254,11 @@ func (a *QiandaoAuthClient) Exchange(ctx context.Context, code string) (*Identit
 	// user.me 为 best-effort：失败仅归属 openId，nickname 用 openId 兜底（绝不阻断登录）。
 	nickname, err := a.fetchNickname(requestCtx, accessToken, userMe, client, limit)
 	if err != nil {
+		log.Printf("[auth] fetchNickname failed: %v (nickname fallback to openId)", err)
 		nickname = openID
 	}
 	if strings.TrimSpace(nickname) == "" {
+		log.Printf("[auth] fetchNickname returned empty, fallback to openId")
 		nickname = openID
 	}
 	return &Identity{OpenID: openID, Nickname: nickname}, nil

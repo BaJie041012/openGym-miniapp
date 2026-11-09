@@ -39,9 +39,17 @@ function clearStored() {
 
 export var Auth = {
   current: null,
+  _readyPromise: null,
 
   init() {
     this.current = loadStored();
+    if (!this.isAuthed()) {
+      // 无有效 session → 启动静默登录，_readyPromise 在 login() 完成后 resolve
+      var self = this;
+      this._readyPromise = this.login().then(function () { return self.current; });
+    } else {
+      this._readyPromise = Promise.resolve(this.current);
+    }
     return this.current;
   },
 
@@ -53,6 +61,16 @@ export var Auth = {
   session() {
     if (!this.current) this.current = loadStored();
     return this.current;
+  },
+
+  // 返回一个 Promise：登录流程完成后 resolve（不管成功失败）。
+  // 页面可以等这个 Promise 再读 session，避免时序问题。
+  ready() {
+    if (this._readyPromise) return this._readyPromise;
+    // init 未被调用的兜底：立即尝试登录
+    var self = this;
+    this._readyPromise = this.login().then(function () { return self.current; });
+    return this._readyPromise;
   },
 
   authHeader() {

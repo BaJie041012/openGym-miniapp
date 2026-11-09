@@ -1,5 +1,5 @@
-﻿/**
- * merge-backend.mjs  ·  openGym
+/**
+ * merge-backend.mjs  ·  czrDexTracker（超自然图鉴）
  * 将 Go 后端多文件源码合并为单文件 main.go + 打包为发布 zip。
  *
  * 千岛平台 Dockerfile 使用 `go build -o /go/bin/app main.go`（单文件编译），
@@ -214,7 +214,7 @@ const zipSizeKB = (zipStat.size / 1024).toFixed(1);
 
 console.log('');
 console.log('═══════════════════════════════════════════════');
-console.log('  ✓ openGym 后端发布包生成成功（单文件合并模式）');
+console.log('  ✓ czrDexTracker 后端发布包生成成功（单文件合并模式）');
 console.log(`  路径: ${OUTPUT_ZIP}`);
 console.log(`  大小: ${zipSizeKB} KB`);
 console.log(`  内容: main.go (合并自 ${goFiles.length} 个文件) + go.mod + go.sum`);

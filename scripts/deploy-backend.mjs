@@ -1,5 +1,5 @@
-﻿/**
- * deploy-backend.mjs  ·  openGym
+/**
+ * deploy-backend.mjs  ·  czrDexTracker（超自然图鉴）
  * 通过 MCP Streamable HTTP 协议调用千岛平台 GitLab MCP 服务，
  * 完成后端仓库初始化 + 代码上传 + 发布触发 + Pipeline 轮询 + 健康检查。
  *
@@ -39,7 +39,7 @@ const config = JSON.parse(readFileSync(CONFIG_PATH, 'utf-8'));
 
 const appId = config.appId;
 const appSecret = config.appSecret;
-const appName = config.name || 'openGym';
+const appName = config.name || 'czrDexTracker';
 const runtime = config.runtime || 'go';
 
 const MCP_URL = 'https://openapi.qiandao.com/gitlab/mcp';
@@ -169,7 +169,7 @@ if (!appSecret || appSecret === 'REPLACE_WITH_APP_SECRET') {
 
 console.log('');
 console.log('═══════════════════════════════════════════════════════════');
-console.log('  千岛后端自动化部署 · openGym');
+console.log('  千岛后端自动化部署 · czrDexTracker（超自然图鉴）');
 console.log(`  AppID:    ${appId}`);
 console.log(`  AppName:  ${appName}`);
 console.log(`  Runtime:  ${runtime}`);

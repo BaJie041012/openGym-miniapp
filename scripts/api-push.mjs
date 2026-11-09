@@ -1,123 +1,120 @@
 #!/usr/bin/env node
-// openGym Git Data API push — 支持 root commit 覆盖已有远端
-// 凭据优先级：环境变量 GITHUB_TOKEN/GITHUB_REPO > git remote.origin.url 自动解析
-import { execSync, spawnSync } from 'node:child_process';
+// czrDexTracker 专用：github.com git 协议被 RST 时，经 GitHub Git Data API
+// 把本地 HEAD 以【完全相同的提交哈希】快进到远端 main，本地零分叉。
+//
+// 用法：
+//   $env:GITHUB_TOKEN='ghp_xxx'; node scripts/api-push.mjs
+//
+// 安全：token 只从环境变量 GITHUB_TOKEN 读取，绝不硬编码/落盘/打印。
+// 幂等：远端 main 已是 HEAD 时直接退出 0；非快进（远端不是 HEAD^）时中止不动。
+//
+// 关键实现（缺一就会产生不同哈希）：
+//   - blob 字节取 `git show HEAD:<path>`（仓内 LF），不能读工作区文件（CRLF 会变哈希），base64 上传
+//   - tree 带 base_tree = 父提交的 tree，entries 仅含本次 diff-tree 变更
+//   - commit 的 author/committer/时间/消息全部从本地提交还原
+//   - commit 消息必须以单个 \n 结尾（git %B 原样形态通常多一个尾部换行），依次尝试三种形态
+//   - 更新引用是 PATCH /git/refs/heads/main（refs 复数）
+import { execSync } from 'node:child_process';
 
+const TOKEN = process.env.GITHUB_TOKEN;
+const REPO = process.env.GITHUB_REPO || 'BaJie041012/czrDexTracker';
 const BRANCH = process.env.GITHUB_BRANCH || 'main';
-const gitBuf = (a) => execSync('git ' + a, { encoding: null, maxBuffer: 64 * 1024 * 1024 });
-const gitTxt = (cmd) => execSync(cmd, { encoding: 'utf8' }).trim();
 
-// --- 凭据解析（三级回退） ---
-let TOKEN = process.env.GITHUB_TOKEN;
-let REPO = process.env.GITHUB_REPO;
-
-// 1) 环境变量 override 已填则直接用
-// 2) 从 git remote.origin.url 解析（支持带 token 和不带 token 两种格式）
-if (!REPO) {
-  const remoteUrl = gitTxt('git config --get remote.origin.url');
-  // https://<token>@github.com/<owner>/<repo> 或 https://github.com/<owner>/<repo>
-  const m = remoteUrl.match(/^https:\/\/(?:[^@]+@)?github\.com\/([^/]+)\/([^/.]+)/);
-  if (m) REPO = m[1] + '/' + m[2];
-}
 if (!TOKEN) {
-  const remoteUrl = gitTxt('git config --get remote.origin.url');
-  // URL 里 token 可能拼在 username 后面（BaJie041012ghp_xxx），也可能用 username:token
-  const m = remoteUrl.match(/^https:\/\/[^@]*?(ghp_[A-Za-z0-9]+)@/);
-  if (m) { TOKEN = m[1]; console.log('凭据来源: git remote.origin.url'); }
+  console.error('FAIL: 未设置环境变量 GITHUB_TOKEN');
+  process.exit(2); // 此时尚无网络句柄，直接退出安全
 }
 
-// 3) remote URL 无 token 时，用 git credential 协议从 Windows 凭据管理器取
-if (!TOKEN) {
-  try {
-    const r = spawnSync('git', ['credential', 'fill'], {
-      input: 'protocol=https\nhost=github.com\n',
-      encoding: 'utf8',
-      stdio: ['pipe', 'pipe', 'pipe']
-    });
-    const pwMatch = r.stdout.match(/^password=(.+)$/m);
-    if (pwMatch) { TOKEN = pwMatch[1].trim(); console.log('凭据来源: git credential (Windows 凭据管理器)'); }
-  } catch (_) {}
-}
-
-if (!TOKEN || !REPO) {
-  console.error('FAIL: 无法获取 GitHub token 或 repo。请设置环境变量 GITHUB_TOKEN / GITHUB_REPO，配置 remote.origin.url（带 token），或在 Windows 凭据管理器里登录 GitHub');
-  process.exit(1);
-}
-console.log('目标仓库:', REPO, '分支:', BRANCH);
-
-const H = { Authorization: 'Bearer ' + TOKEN, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json', 'User-Agent': 'opengym-push' };
+const H = {
+  Authorization: 'Bearer ' + TOKEN,
+  'User-Agent': 'czr-push',
+  Accept: 'application/vnd.github+json',
+  'Content-Type': 'application/json'
+};
+const sh = (fmt) => execSync('git show -s --format=' + fmt + ' HEAD', { encoding: 'utf8' }).trim();
+const gitBuf = (args) => execSync('git ' + args, { encoding: null, maxBuffer: 64 * 1024 * 1024 });
+const gitTxt = (cmd) => execSync(cmd, { encoding: 'utf8' });
 
 async function api(method, p, body) {
-  const r = await fetch('https://api.github.com/repos/' + REPO + p, { method, headers: H, body: body ? JSON.stringify(body) : undefined });
+  const r = await fetch('https://api.github.com/repos/' + REPO + p, {
+    method,
+    headers: H,
+    body: body ? JSON.stringify(body) : undefined
+  });
   const j = await r.json().catch(() => ({}));
   if (!r.ok) throw new Error(method + ' ' + p + ' -> ' + r.status + ' ' + (j.message || JSON.stringify(j)));
   return j;
 }
 
-(async () => {
-  const LOCAL_SHA = gitTxt('git show -s --format=%H HEAD').trim();
-  const LOCAL_TREE = gitTxt('git show -s --format=%T HEAD').trim();
-  const PARENT = gitTxt('git show -s --format=%P HEAD').trim();
-  const IS_ROOT = !PARENT;
-  console.log('HEAD:', LOCAL_SHA, 'tree:', LOCAL_TREE, 'parent:', PARENT || '(root)');
+const LOCAL_SHA = sh('%H');
+const LOCAL_TREE = sh('%T');
+const PARENT = sh('%P');
 
-  // Upload all blobs (no base_tree for root commit)
-  const ls = gitTxt('git ls-tree -r HEAD').trim().split('\n').filter(Boolean);
+(async () => {
+  console.log('local HEAD:', LOCAL_SHA, '| parent:', PARENT);
+  const ref = await api('GET', '/git/ref/heads/' + BRANCH);
+  const remoteSha = ref.object.sha;
+
+  if (remoteSha === LOCAL_SHA) {
+    console.log('远端 ' + BRANCH + ' 已是 ' + LOCAL_SHA + '，无需推送');
+    return; // 让事件循环自然排空，避免 Windows 下 process.exit 与 undici 句柄断言冲突
+  }
+  if (remoteSha !== PARENT) {
+    throw new Error('远端 ' + BRANCH + '=' + remoteSha + ' 不是本地父提交 ' + PARENT + '，非快进，中止（请先人工核对）');
+  }
+
+  const baseTree = (await api('GET', '/git/commits/' + PARENT)).tree.sha;
+
+  // 逐 blob 上传并与本地哈希比对
+  const raw = gitTxt('git diff-tree --no-commit-id -r ' + LOCAL_SHA).trim().split('\n').filter(Boolean);
   const entries = [];
-  for (const line of ls) {
-    const parts = line.split(/\s+/);
-    const [mode, type, wantBlob] = parts;
-    const path = parts.slice(3).join(' ');
+  for (const line of raw) {
+    const m = line.match(/^:(\d+) (\d+) [0-9a-f]{40} ([0-9a-f]{40}) ([AM])\t(.+)$/);
+    if (!m) throw new Error('无法解析 diff-tree 行: ' + line);
+    const [, mode, , wantBlob, , path] = m;
     const blob = await api('POST', '/git/blobs', {
       content: gitBuf('show HEAD:' + path).toString('base64'),
       encoding: 'base64'
     });
-    if (blob.sha !== wantBlob) throw new Error(path + ' blob sha mismatch');
+    if (blob.sha !== wantBlob) throw new Error(path + ' blob 不一致: API=' + blob.sha + ' 本地=' + wantBlob + '，中止');
     entries.push({ path, mode, type: 'blob', sha: blob.sha });
   }
-  console.log('blobs ok:', entries.length);
+  console.log('blobs 一致:', entries.length);
 
-  // Create tree (no base_tree)
-  const tree = await api('POST', '/git/trees', { tree: entries });
-  if (tree.sha !== LOCAL_TREE) throw new Error('tree mismatch');
-  console.log('tree ok:', tree.sha);
+  const tree = await api('POST', '/git/trees', { base_tree: baseTree, tree: entries });
+  if (tree.sha !== LOCAL_TREE) throw new Error('tree 不一致: API=' + tree.sha + ' 本地=' + LOCAL_TREE + '，中止');
+  console.log('tree 一致:', tree.sha);
 
-  // Create commit — try 3 message shapes
-  // 如果 parent 不在远端，就不带 parents（force push 覆盖模式）
-  const message = gitTxt('git show -s --format=%B HEAD');
-  const person = (w) => ({
-    name: gitTxt('git show -s --format=%' + w + 'n HEAD').trim(),
-    email: gitTxt('git show -s --format=%' + w + 'e HEAD').trim(),
-    date: gitTxt('git show -s --format=%' + w + 'I HEAD').trim()
+  const message = gitTxt('git show -s --format=%B ' + LOCAL_SHA);
+  const person = (which) => ({
+    name: sh('%' + which + 'n'),
+    email: sh('%' + which + 'e'),
+    date: sh('%' + which + 'I')
   });
-
-  // 检测 parent 是否在远端
-  let parentExists = false;
-  if (PARENT) {
-    try {
-      await api('GET', '/git/commits/' + PARENT);
-      parentExists = true;
-      console.log('parent 在远端:', PARENT.slice(0, 7));
-    } catch (_) {
-      console.log('parent 不在远端，将以 root commit 覆盖远端');
-    }
-  }
-
-  // 创建 commit — 如果 parent 不在远端，用 root commit 覆盖模式，SHA 不会和本地匹配，跳过 mismatch 检查
-  let commitSha;
+  // %B 原样、去尾部空白后补单 \n、完全 trim —— 依次尝试直到哈希一致
   const candidates = [message, message.replace(/\s+$/, '\n'), message.trimEnd()];
+  let matched = false;
   for (const msg of candidates) {
-    const body = { message: msg, tree: LOCAL_TREE, author: person('a'), committer: person('c') };
-    if (PARENT && parentExists) body.parents = [PARENT];
-    const commit = await api('POST', '/git/commits', body);
-    console.log('  commit ->', commit.sha, '(local:', LOCAL_SHA.slice(0, 7), ')');
-    commitSha = commit.sha;
-    if (PARENT && parentExists && commit.sha === LOCAL_SHA) break;  // 正常模式：匹配就停
-    if (!PARENT || !parentExists) break;                             // root 覆盖模式：第一试就停
+    const commit = await api('POST', '/git/commits', {
+      message: msg,
+      tree: LOCAL_TREE,
+      parents: [PARENT],
+      author: person('a'),
+      committer: person('c')
+    });
+    if (commit.sha === LOCAL_SHA) {
+      console.log('commit 哈希一致:', commit.sha);
+      matched = true;
+      break;
+    }
+    console.log('消息形态不匹配(' + commit.sha + ')，尝试下一形态');
   }
-  if (!commitSha) throw new Error('commit 创建失败');
+  if (!matched) throw new Error('三种消息形态均无法匹配本地哈希，未更新引用，中止');
 
-  // Force update ref
-  const upd = await api('PATCH', '/git/refs/heads/' + BRANCH, { sha: commitSha, force: true });
-  console.log('✅ pushed:', upd.object.sha, '(force=true)');
-})().catch(e => { console.error('FAIL:', e.message); process.exit(1); });
+  const upd = await api('PATCH', '/git/refs/heads/' + BRANCH, { sha: LOCAL_SHA, force: false });
+  console.log('远端 ' + BRANCH + ' 已快进:', upd.object.sha);
+})().catch((e) => {
+  // 只设退出码，不调 process.exit——让 undici 句柄自然关闭，规避 Windows libuv 断言
+  console.error('FAIL:', e.message);
+  process.exitCode = 1;
+});

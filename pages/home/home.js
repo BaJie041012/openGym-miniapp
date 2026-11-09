@@ -21,8 +21,13 @@ Page({
   },
 
   onLoad: function () {
-    this._refreshAuth();
-    this._loadPlayers();
+    var self = this;
+    // 先立即刷一次（可能已有旧 session），同时等登录完成后再刷
+    self._refreshAuth();
+    if (Auth.ready) {
+      Auth.ready().then(function () { self._refreshAuth(); });
+    }
+    self._loadPlayers();
   },
 
   onShow: function () {
