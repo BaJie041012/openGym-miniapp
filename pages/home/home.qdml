@@ -14,13 +14,12 @@
   <!-- 主面板：三个按钮 -->
   <view class="main-panel" wx:if="{{panel === 'main'}}">
     <view class="title">好友码管理</view>
-    <view class="desc">在登录界面右上角的「玩家账号：******」就是你要填入的数字</view>
 
     <view class="btn btn-manage" bindtap="openManage">
       <text class="btn-icon">⚙️</text>
       <view class="btn-text">
         <view class="btn-title">管理账号</view>
-        <view class="btn-sub">创建 / 删除玩家账号</view>
+        <view class="btn-sub">创建 / 删除玩家账号 · 登录界面右上角「玩家账号：******」</view>
       </view>
     </view>
 
