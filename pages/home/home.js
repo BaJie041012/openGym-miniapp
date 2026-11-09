@@ -16,8 +16,11 @@ Page({
     loading: false,
     // UI 状态：哪个面板展开
     panel: 'main',        // main / manage / addCodes / claimResult
-    // 添加好友码输入框内容（批量，每行一个）
-    codeInput: '',
+    // 伪表格：好友码 + 备注，每行 {code, nick}
+    codeRows: [
+      { code: '', nick: '' },
+      { code: '', nick: '' }
+    ],
     // 创建玩家账号弹层
     showCreateModal: false,
     newPlayerId: '',
@@ -159,15 +162,39 @@ Page({
       if (rt) rt.showToast({ title: '请先创建玩家账号', icon: 'none' });
       return;
     }
-    this.setData({ panel: 'addCodes', codeInput: '' });
+    this.setData({ panel: 'addCodes', codeRows: [{ code: '', nick: '' }, { code: '', nick: '' }] });
   },
 
   closeAddCodes: function () {
     this.setData({ panel: 'main' });
   },
 
-  onCodeInput: function (e) {
-    this.setData({ codeInput: e.detail.value });
+  addRow: function () {
+    var rows = this.data.codeRows.slice();
+    rows.push({ code: '', nick: '' });
+    this.setData({ codeRows: rows });
+  },
+
+  delRow: function (e) {
+    var idx = e.currentTarget.dataset.idx;
+    var rows = this.data.codeRows.slice();
+    rows.splice(idx, 1);
+    if (rows.length === 0) rows.push({ code: '', nick: '' });
+    this.setData({ codeRows: rows });
+  },
+
+  onRowCode: function (e) {
+    var idx = e.currentTarget.dataset.idx;
+    var rows = this.data.codeRows.slice();
+    rows[idx] = { code: e.detail.value, nick: rows[idx].nick };
+    this.setData({ codeRows: rows });
+  },
+
+  onRowNick: function (e) {
+    var idx = e.currentTarget.dataset.idx;
+    var rows = this.data.codeRows.slice();
+    rows[idx] = { code: rows[idx].code, nick: e.detail.value };
+    this.setData({ codeRows: rows });
   },
 
   submitCodes: function () {
@@ -177,15 +204,12 @@ Page({
       if (rt) rt.showToast({ title: '请先选择玩家账号', icon: 'none' });
       return;
     }
-    var text = (this.data.codeInput || '').trim();
-    if (!text) {
-      if (rt) rt.showToast({ title: '请输入好友码', icon: 'none' });
-      return;
-    }
-    // 按换行分割
-    var codes = text.split(/\r?\n/).map(function (s) { return s.trim(); }).filter(Boolean);
+    // 过滤空行
+    var codes = this.data.codeRows
+      .map(function (r) { return String(r.code || '').trim(); })
+      .filter(Boolean);
     if (codes.length === 0) {
-      if (rt) rt.showToast({ title: '请输入好友码', icon: 'none' });
+      if (rt) rt.showToast({ title: '请输入至少一条好友码', icon: 'none' });
       return;
     }
     self.setData({ loading: true });
@@ -196,7 +220,7 @@ Page({
         return;
       }
       if (rt) rt.showToast({ title: '添加成功：新增' + result.inserted + '条', icon: 'success' });
-      self.setData({ codeInput: '' });
+      self.setData({ codeRows: [{ code: '', nick: '' }, { code: '', nick: '' }] });
       self._loadCodes(self.data.selectedPlayerId);
     });
   },

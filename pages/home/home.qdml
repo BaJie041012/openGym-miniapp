@@ -71,14 +71,34 @@
     <view class="selected-info" wx:if="{{selectedPlayerId}}">
       当前账号：<text class="sel-bold">{{selectedPlayerId}}</text>
     </view>
-    <textarea
-      class="code-input"
-      placeholder="粘贴好友码，每行一条，可批量填入"
-      value="{{codeInput}}"
-      bindinput="onCodeInput"
-      auto-height="{{true}}"
-      confirm-type="default"
-    />
+
+    <!-- 伪表格：好友码 + 备注 -->
+    <view class="code-table">
+      <view class="code-table-head">
+        <view class="th th-code">好友码</view>
+        <view class="th th-nick">备注（可选）</view>
+        <view class="th th-del"></view>
+      </view>
+      <view class="code-row" wx:for="{{codeRows}}" wx:key="index">
+        <input
+          class="td td-code"
+          placeholder="好友码"
+          value="{{item.code}}"
+          data-idx="{{index}}"
+          bindinput="onRowCode"
+        />
+        <input
+          class="td td-nick"
+          placeholder="备注"
+          value="{{item.nick}}"
+          data-idx="{{index}}"
+          bindinput="onRowNick"
+        />
+        <view class="td td-del" bindtap="delRow" data-idx="{{index}}">✕</view>
+      </view>
+      <view class="code-add" bindtap="addRow">+ 再加一行</view>
+    </view>
+
     <button class="submit-btn" bindtap="submitCodes" disabled="{{loading}}">
       {{loading ? '提交中…' : '提交添加'}}
     </button>
