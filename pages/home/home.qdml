@@ -115,4 +115,36 @@
     <view class="disclaimer-line">若遇他人白嫖，请及时拉黑止损，平台不承担相关责任</view>
   </view>
 
+  <!-- 自定义弹层：创建玩家账号 -->
+  <view class="modal-mask" wx:if="{{showCreateModal}}" bindtap="closeCreateModal">
+    <view class="modal-box" catchtap="noop">
+      <view class="modal-title">创建玩家账号</view>
+      <view class="modal-field">
+        <view class="modal-label">玩家账号</view>
+        <input
+          class="modal-input"
+          type="number"
+          placeholder="输入纯数字账号（如 888888）"
+          value="{{newPlayerId}}"
+          bindinput="onNewPlayerId"
+          maxlength="20"
+        />
+      </view>
+      <view class="modal-field">
+        <view class="modal-label">备注名（可选）</view>
+        <input
+          class="modal-input"
+          placeholder="给这个账号起个名字"
+          value="{{newPlayerNick}}"
+          bindinput="onNewPlayerNick"
+          maxlength="20"
+        />
+      </view>
+      <view class="modal-actions">
+        <view class="modal-btn modal-btn-cancel" bindtap="closeCreateModal">取消</view>
+        <view class="modal-btn modal-btn-confirm" bindtap="confirmCreatePlayer">确定</view>
+      </view>
+    </view>
+  </view>
+
 </view>

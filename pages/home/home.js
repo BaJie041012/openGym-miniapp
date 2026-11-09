@@ -17,7 +17,11 @@ Page({
     // UI 状态：哪个面板展开
     panel: 'main',        // main / manage / addCodes / claimResult
     // 添加好友码输入框内容（批量，每行一个）
-    codeInput: ''
+    codeInput: '',
+    // 创建玩家账号弹层
+    showCreateModal: false,
+    newPlayerId: '',
+    newPlayerNick: ''
   },
 
   onLoad: function () {
@@ -81,44 +85,38 @@ Page({
   },
 
   createPlayer: function () {
-    var self = this;
-    var rt = typeof qd !== 'undefined' ? qd : null;
-    if (!rt) return;
-
-    rt.showModal({
-      title: '创建玩家账号',
-      editable: true,
-      placeholderText: '输入纯数字账号（如 888888）',
-      success: function (res) {
-        if (!res.confirm || !res.content) return;
-        var playerId = String(res.content).trim();
-        if (!/^\d{1,20}$/.test(playerId)) {
-          rt.showToast({ title: '必须是1-20位纯数字', icon: 'none' });
-          return;
-        }
-        // 检查是否已存在
-        var exists = self.data.players.some(function (p) { return p.playerId === playerId; });
-        if (exists) {
-          rt.showToast({ title: '账号已存在', icon: 'none' });
-          return;
-        }
-        rt.showModal({
-          title: '备注名（可选）',
-          editable: true,
-          placeholderText: '给这个账号起个名字',
-          success: function (res2) {
-            if (!res2.confirm) return;
-            var nickname = res2.content ? String(res2.content).trim() : '';
-            self._doCreatePlayer(playerId, nickname);
-          }
-        });
-      }
-    });
+    this.setData({ showCreateModal: true, newPlayerId: '', newPlayerNick: '' });
   },
 
-  _doCreatePlayer: function (playerId, nickname) {
+  closeCreateModal: function () {
+    this.setData({ showCreateModal: false });
+  },
+
+  noop: function () { /* 阻止遮罩点击穿透 */ },
+
+  onNewPlayerId: function (e) {
+    this.setData({ newPlayerId: e.detail.value });
+  },
+
+  onNewPlayerNick: function (e) {
+    this.setData({ newPlayerNick: e.detail.value });
+  },
+
+  confirmCreatePlayer: function () {
     var self = this;
     var rt = typeof qd !== 'undefined' ? qd : null;
+    var playerId = String(self.data.newPlayerId || '').trim();
+    var nickname = String(self.data.newPlayerNick || '').trim();
+    if (!/^\d{1,20}$/.test(playerId)) {
+      if (rt) rt.showToast({ title: '必须是1-20位纯数字', icon: 'none' });
+      return;
+    }
+    var exists = self.data.players.some(function (p) { return p.playerId === playerId; });
+    if (exists) {
+      if (rt) rt.showToast({ title: '账号已存在', icon: 'none' });
+      return;
+    }
+    self.setData({ showCreateModal: false });
     API.createPlayer(playerId, nickname).then(function () {
       if (rt) rt.showToast({ title: '创建成功', icon: 'success' });
       self._loadPlayers();
