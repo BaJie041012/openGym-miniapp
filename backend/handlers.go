@@ -7,6 +7,7 @@ package main
 //   /api/claim                      POST 获取随机好友码
 
 import (
+	"log"
 	"net/http"
 	"strings"
 	"time"
@@ -169,6 +170,7 @@ func (s *backendServer) handleCodes(w http.ResponseWriter, r *http.Request, play
 			seen[c] = true
 			clean = append(clean, c)
 		}
+		log.Printf("[addCodes] openId=%s playerId=%s raw=%d clean=%d", identity.OpenID, playerID, len(body.Codes), len(clean))
 		if len(clean) == 0 {
 			writeFail(w, ErrParam, "请输入好友码")
 			return
@@ -179,6 +181,7 @@ func (s *backendServer) handleCodes(w http.ResponseWriter, r *http.Request, play
 			writeFail(w, ErrInternal, "添加失败")
 			return
 		}
+		log.Printf("[addCodes] 结果 inserted=%d total=%d", n, len(clean))
 		writeOK(w, map[string]int{"inserted": n, "total": len(clean)})
 
 	case http.MethodDelete:
