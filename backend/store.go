@@ -208,9 +208,10 @@ type ClaimResult struct {
 	PlayerID string
 }
 
-// claimOne 原子性获取一条好友码（满足约束 A+B）。
+// claimOne 原子性获取一条好友码（满足约束 A+B+C）。
 // 约束 A: code.claimedBy 为空（未被任何用户获取过）
 // 约束 B: code.playerId 不在该用户已碰过的玩家账号列表里
+// 约束 C: code.ownerOpenId != 当前 openId（不拿自己添加的码）
 // 返回 (code, playerId, error)。无可用码时返回 ( "", "", nil )。
 func (s *mongoStore) claimOne(ctx context.Context, openID string, now int64) (*ClaimResult, error) {
 	if !s.available() {
@@ -224,7 +225,8 @@ func (s *mongoStore) claimOne(ctx context.Context, openID string, now int64) (*C
 
 	// findOneAndUpdate：原子性选取 + 标记已获取
 	filter := bson.M{
-		"claimedBy": "", // 约束 A
+		"claimedBy":    "",           // 约束 A
+		"ownerOpenId":  bson.M{"$ne": openID}, // 约束 C：不拿自己的
 	}
 	if len(claimedPlayerIDs) > 0 {
 		filter["playerId"] = bson.M{"$nin": claimedPlayerIDs} // 约束 B
