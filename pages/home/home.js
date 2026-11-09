@@ -24,7 +24,9 @@ Page({
     // 创建玩家账号弹层
     showCreateModal: false,
     newPlayerId: '',
-    newPlayerNick: ''
+    newPlayerNick: '',
+    // 切换账号弹层
+    showSwitchModal: false
   },
 
   onLoad: function () {
@@ -151,6 +153,20 @@ Page({
   selectPlayer: function (e) {
     var playerId = e.currentTarget.dataset.id;
     this.setData({ selectedPlayerId: playerId });
+    this._loadCodes(playerId);
+  },
+
+  openSwitchAccount: function () {
+    this.setData({ showSwitchModal: true });
+  },
+
+  closeSwitchAccount: function () {
+    this.setData({ showSwitchModal: false });
+  },
+
+  confirmSwitch: function (e) {
+    var playerId = e.currentTarget.dataset.id;
+    this.setData({ selectedPlayerId: playerId, showSwitchModal: false });
     this._loadCodes(playerId);
   },
 

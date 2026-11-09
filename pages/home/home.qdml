@@ -1,13 +1,40 @@
 <!-- 好友码管理 首页 -->
 <view class="page">
 
-  <!-- 顶部：左上角昵称 -->
+  <!-- 顶部：左上角昵称 + 当前账号 + 切换按钮 -->
   <view class="top-bar">
     <view class="nickname">
       <text class="nickname-text">你好，{{nickname || '旅人'}}</text>
     </view>
-    <view class="id-tip" wx:if="{{players.length > 0}}">
-      我的玩家账号：{{players[0].playerId}}{{players.length > 1 ? '…等' + players.length + '个' : ''}}
+    <view class="account-row" wx:if="{{players.length > 0}}">
+      <text class="account-label">当前账号：</text>
+      <text class="account-value">{{selectedPlayerId || players[0].playerId}}</text>
+      <view class="switch-btn" wx:if="{{players.length > 1}}" bindtap="openSwitchAccount">切换</view>
+    </view>
+    <view class="account-row" wx:else>
+      <text class="account-empty">还没有玩家账号，点「管理账号」创建</text>
+    </view>
+  </view>
+
+  <!-- 切换账号弹层 -->
+  <view class="modal-mask" wx:if="{{showSwitchModal}}" bindtap="closeSwitchAccount">
+    <view class="modal-box" catchtap="noop">
+      <view class="modal-title">切换账号</view>
+      <view class="switch-list">
+        <view
+          class="switch-item {{selectedPlayerId === item.playerId ? 'switch-active' : ''}}"
+          wx:for="{{players}}"
+          wx:key="playerId"
+          bindtap="confirmSwitch"
+          data-id="{{item.playerId}}"
+        >
+          <text class="switch-id">{{item.playerId}}</text>
+          <text class="switch-check" wx:if="{{selectedPlayerId === item.playerId}}">✓</text>
+        </view>
+      </view>
+      <view class="modal-actions">
+        <view class="modal-btn modal-btn-cancel" bindtap="closeSwitchAccount">关闭</view>
+      </view>
     </view>
   </view>
 
