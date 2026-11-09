@@ -77,6 +77,7 @@
       value="{{codeInput}}"
       bindinput="onCodeInput"
       auto-height="{{true}}"
+      confirm-type="default"
     />
     <button class="submit-btn" bindtap="submitCodes" disabled="{{loading}}">
       {{loading ? '提交中…' : '提交添加'}}
