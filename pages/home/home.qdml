@@ -1,41 +1,112 @@
+<!-- 好友码管理 首页 -->
 <view class="page">
-  <view class="hero">
-    <text class="hero-greeting">今天是</text>
-    <text class="hero-date">{{todayLabel}}</text>
-  </view>
 
-  <view wx:if="{{activeFlag}}" class="card card-active" bindtap="goWorkout">
-    <text class="card-label">训练进行中</text>
-    <text class="card-title">继续 {{activeExerciseName}}</text>
-    <text class="card-hint">点击返回训练</text>
-  </view>
-
-  <view class="card">
-    <text class="title">{{hasRoutine ? '今日训练' : '今日休息日'}}</text>
-    <block wx:if="{{hasRoutine}}">
-      <view class="exercise-list">
-        <view wx:for="{{todaysRoutine}}" wx:key="name" class="exercise-item">
-          <text class="exercise-idx">{{index + 1}}</text>
-          <view class="exercise-info">
-            <text class="exercise-name">{{item.name}}</text>
-            <text class="muted">{{item.sets || 3}} × {{item.reps || 10}}</text>
-          </view>
-        </view>
-      </view>
-      <view wx:if="{{!activeFlag}}" class="btn {{todayDone ? 'btn-done' : ''}}" bindtap="startToday">{{todayDone ? '✓ 今日已完成 · 点击加练' : '开始今日训练'}}</view>
-    </block>
-    <text wx:else class="muted">没有安排训练，好好休息</text>
-  </view>
-
-  <view wx:if="{{recentHistory.length > 0}}" class="card">
-    <text class="title">最近训练</text>
-    <view wx:for="{{recentHistory}}" wx:key="startedAt" class="history-row">
-      <text class="history-date">{{item.dateLabel}}</text>
-      <text class="muted">{{item.exerciseCount}} 个动作</text>
+  <!-- 顶部：左上角昵称 -->
+  <view class="top-bar">
+    <view class="nickname">
+      <text class="nickname-text">{{nickname}}</text>
+    </view>
+    <view class="id-tip" wx:if="{{players.length > 0}}">
+      我的玩家账号：{{players[0].playerId}}{{players.length > 1 ? '…等' + players.length + '个' : ''}}
     </view>
   </view>
 
-  <view class="license-note">
-    <text class="muted">openGym · AGPL-3.0 · Gym visual 媒体已剥离</text>
+  <!-- 主面板：三个按钮 -->
+  <view class="main-panel" wx:if="{{panel === 'main'}}">
+    <view class="title">好友码管理</view>
+    <view class="desc">在登录界面右上角的「玩家账号：******」就是你要填入的数字</view>
+
+    <view class="btn btn-manage" bindtap="openManage">
+      <text class="btn-icon">⚙️</text>
+      <view class="btn-text">
+        <view class="btn-title">管理账号</view>
+        <view class="btn-sub">创建 / 删除玩家账号</view>
+      </view>
+    </view>
+
+    <view class="btn btn-add" bindtap="openAddCodes">
+      <text class="btn-icon">➕</text>
+      <view class="btn-text">
+        <view class="btn-title">添加好友码</view>
+        <view class="btn-sub">批量粘贴，换行分隔</view>
+      </view>
+    </view>
+
+    <view class="btn btn-claim" bindtap="doClaim">
+      <text class="btn-icon">🎲</text>
+      <view class="btn-text">
+        <view class="btn-title">获取好友码</view>
+        <view class="btn-sub">{{loading ? '获取中…' : '随机领取一条新的'}}</view>
+      </view>
+    </view>
   </view>
+
+  <!-- 管理账号面板 -->
+  <view class="sub-panel" wx:if="{{panel === 'manage'}}">
+    <view class="sub-header">
+      <text class="sub-title">管理账号</text>
+      <text class="back-btn" bindtap="closeManage">返回</text>
+    </view>
+    <view class="create-row">
+      <button class="create-btn" bindtap="createPlayer">+ 创建玩家账号</button>
+    </view>
+    <view class="player-list" wx:if="{{players.length > 0}}">
+      <view class="player-item" wx:for="{{players}}" wx:key="playerId">
+        <view class="player-info" bindtap="selectPlayer" data-id="{{item.playerId}}">
+          <view class="player-id">{{item.playerId}}</view>
+          <view class="player-nick" wx:if="{{item.nickname}}">{{item.nickname}}</view>
+        </view>
+        <view class="player-del" bindtap="deletePlayer" data-id="{{item.playerId}}">删除</view>
+      </view>
+    </view>
+    <view class="empty" wx:else>暂无玩家账号</view>
+  </view>
+
+  <!-- 添加好友码面板 -->
+  <view class="sub-panel" wx:if="{{panel === 'addCodes'}}">
+    <view class="sub-header">
+      <text class="sub-title">添加好友码</text>
+      <text class="back-btn" bindtap="closeAddCodes">返回</text>
+    </view>
+    <view class="selected-info" wx:if="{{selectedPlayerId}}">
+      当前账号：<text class="sel-bold">{{selectedPlayerId}}</text>
+    </view>
+    <textarea
+      class="code-input"
+      placeholder="粘贴好友码，每行一条，可批量填入"
+      value="{{codeInput}}"
+      bindinput="onCodeInput"
+      auto-height="{{true}}"
+    />
+    <button class="submit-btn" bindtap="submitCodes" disabled="{{loading}}">
+      {{loading ? '提交中…' : '提交添加'}}
+    </button>
+
+    <!-- 当前账号已有的好友码列表 -->
+    <view class="codes-section" wx:if="{{selectedPlayerId && codes.length > 0}}">
+      <view class="codes-title">已添加的好友码（{{codes.length}}）</view>
+      <view class="codes-list">
+        <view class="code-item" wx:for="{{codes}}" wx:key="code">
+          <text class="code-text">{{item.code}}</text>
+          <text class="code-claimed" wx:if="{{item.claimedBy}}">已被领取</text>
+          <text class="code-del" bindtap="deleteCode" data-code="{{item.code}}">✕</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 获取结果面板 -->
+  <view class="sub-panel" wx:if="{{panel === 'claimResult'}}">
+    <view class="sub-header">
+      <text class="sub-title">获取成功</text>
+      <text class="back-btn" bindtap="closeClaim">继续</text>
+    </view>
+    <view class="claim-box">
+      <view class="claim-label">你的好友码：</view>
+      <view class="claim-value">{{claimResult}}</view>
+      <view class="claim-from" wx:if="{{claimPlayerId}}">来自玩家账号 {{claimPlayerId}}</view>
+      <view class="claim-tip">提示：此好友码已被一次性领取，不会再推送给他人</view>
+    </view>
+  </view>
+
 </view>

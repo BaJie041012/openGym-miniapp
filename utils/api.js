@@ -1,4 +1,4 @@
-// openGym 后端 API 封装 — routines / history / exercises
+// 好友码管理 后端 API 封装
 // 全部基于 Auth.session() 携带 Bearer 会话；未登录或网络失败静默降级为 null
 
 import { requestJSON } from './http.js';
@@ -10,42 +10,52 @@ function authed() {
   return h;
 }
 
-// GET /api/routines — 拉取云端周计划；未登录/失败返回 null
-function getRoutine() {
+// ─── 玩家账号 ────────────────────────────────────────────────────────────────
+
+function listPlayers() {
   var h = authed();
   if (!h) return Promise.resolve(null);
-  return requestJSON('GET', '/api/routines', null, h);
+  return requestJSON('GET', '/api/players', null, h);
 }
 
-// PUT /api/routines — 单日局部合并 {day, plans}
-function putRoutineDay(day, plans) {
+function createPlayer(playerId, nickname) {
   var h = authed();
   if (!h) return Promise.resolve(null);
-  return requestJSON('PUT', '/api/routines', { day: day, plans: plans }, h);
+  return requestJSON('POST', '/api/players', { playerId: playerId, nickname: nickname || '' }, h);
 }
 
-// GET /api/exercises — 动作库分页检索（公开）
-function listExercises(params) {
-  var p = params || {};
-  var qs = '?page=' + (p.page || 1) + '&size=' + (p.size || 20);
-  if (p.q) qs += '&q=' + encodeURIComponent(p.q);
-  if (p.muscle) qs += '&muscle=' + encodeURIComponent(p.muscle);
-  if (p.equipment) qs += '&equipment=' + encodeURIComponent(p.equipment);
-  return requestJSON('GET', '/api/exercises' + qs);
-}
-
-// GET /api/history — 增量拉取训练记录
-function getHistory(since, limit) {
+function deletePlayer(playerId) {
   var h = authed();
   if (!h) return Promise.resolve(null);
-  return requestJSON('GET', '/api/history?since=' + (since || 0) + '&limit=' + (limit || 100), null, h);
+  return requestJSON('DELETE', '/api/players/' + encodeURIComponent(playerId), null, h);
 }
 
-// POST /api/history — 批量同步训练记录（recordId 幂等）
-function pushHistory(records) {
+// ─── 好友码 ─────────────────────────────────────────────────────────────────
+
+function listCodes(playerId) {
   var h = authed();
   if (!h) return Promise.resolve(null);
-  return requestJSON('POST', '/api/history', { records: records }, h);
+  return requestJSON('GET', '/api/players/' + encodeURIComponent(playerId) + '/codes', null, h);
 }
 
-export { getRoutine, putRoutineDay, listExercises, getHistory, pushHistory };
+function addCodes(playerId, codes) {
+  var h = authed();
+  if (!h) return Promise.resolve(null);
+  return requestJSON('POST', '/api/players/' + encodeURIComponent(playerId) + '/codes', { codes: codes }, h);
+}
+
+function deleteCode(playerId, code) {
+  var h = authed();
+  if (!h) return Promise.resolve(null);
+  return requestJSON('DELETE', '/api/players/' + encodeURIComponent(playerId) + '/codes?code=' + encodeURIComponent(code), null, h);
+}
+
+// ─── 获取 ────────────────────────────────────────────────────────────────────
+
+function claimOne() {
+  var h = authed();
+  if (!h) return Promise.resolve(null);
+  return requestJSON('POST', '/api/claim', null, h);
+}
+
+export { listPlayers, createPlayer, deletePlayer, listCodes, addCodes, deleteCode, claimOne };

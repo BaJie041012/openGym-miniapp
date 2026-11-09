@@ -96,9 +96,6 @@ func startBackend() error {
 		if ierr := store.syncIndexes(idxCtx); ierr != nil {
 			log.Printf("[boot] 索引对齐告警: %v", ierr)
 		}
-		if n, ierr := store.countExercises(idxCtx); ierr == nil {
-			log.Printf("[boot] 动作库条目数: %d", n)
-		}
 		cancel()
 	}
 
@@ -134,17 +131,21 @@ func startBackend() error {
 // registerRoutes 注册全部路由。约定：
 //   - /health 完全公开（编排平台存活探针）；
 //   - /api/auth/login 公开（内部限流）；
-//   - /api/exercises 公开只读（动作库静态内容，未登录可浏览）；
-//   - /api/routines、/api/history 需认证（requiredAuth）。
+//   - 其余 /api/* 需认证（requiredAuth）。
+//
+// Go ServeMux 不支持路径参数，/api/players/* 统一交给 handlePlayersRouter
+// 内部按 path segments + method 再分发。
 func (s *backendServer) registerRoutes() *http.ServeMux {
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("/health", s.handleHealth)
 	mux.HandleFunc("/api/auth/login", s.handleLogin)
-	mux.HandleFunc("/api/exercises", s.handleExercises)
-	mux.HandleFunc("/api/routines", s.requiredAuth(s.handleRoutines))
-	mux.HandleFunc("/api/history", s.requiredAuth(s.handleHistory))
-	mux.HandleFunc("/api/admin/seed", s.handleSeed)
+
+	// /api/players/* — 玩家账号 + 好友码 统一分发
+	mux.HandleFunc("/api/players", s.requiredAuth(s.handlePlayersRouter))
+	mux.HandleFunc("/api/players/", s.requiredAuth(s.handlePlayersRouter))
+	// 获取好友码
+	mux.HandleFunc("/api/claim", s.requiredAuth(s.handleClaim))
 
 	// 未匹配路由：返回统一 404 降级壳。
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
