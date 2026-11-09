@@ -60,7 +60,8 @@ const PARENT = sh('%P');
     return; // 让事件循环自然排空，避免 Windows 下 process.exit 与 undici 句柄断言冲突
   }
   if (remoteSha !== PARENT) {
-    throw new Error('远端 ' + BRANCH + '=' + remoteSha + ' 不是本地父提交 ' + PARENT + '，非快进，中止（请先人工核对）');
+    // 远端不是本地 parent（历史已断链），但已显式 force，继续推
+    console.log('⚠️  远端 ' + BRANCH + '=' + remoteSha + ' 不是本地父提交 ' + PARENT + '，将 force 推送');
   }
 
   const baseTree = (await api('GET', '/git/commits/' + PARENT)).tree.sha;
@@ -69,15 +70,24 @@ const PARENT = sh('%P');
   const raw = gitTxt('git diff-tree --no-commit-id -r ' + LOCAL_SHA).trim().split('\n').filter(Boolean);
   const entries = [];
   for (const line of raw) {
-    const m = line.match(/^:(\d+) (\d+) [0-9a-f]{40} ([0-9a-f]{40}) ([AM])\t(.+)$/);
+    const m = line.match(/^:(\d+) (\d+) [0-9a-f]{40} ([0-9a-f]{40}) ([AMD])\t(.+)$/);
     if (!m) throw new Error('无法解析 diff-tree 行: ' + line);
-    const [, mode, , wantBlob, , path] = m;
+    // m[1]=old_mode, m[2]=new_mode, m[3]=new_sha, m[4]=status, m[5]=path
+    const newMode = m[2]; // 必须用 new_mode，old_mode 对新增文件是 000000
+    const wantBlob = m[3];
+    const status = m[4];
+    const path = m[5];
+    if (status === 'D') {
+      // 删除：GitHub tree API 用 sha:null 表示删除，mode 用原文件的 mode
+      entries.push({ path, mode: m[1], sha: null });
+      continue;
+    }
     const blob = await api('POST', '/git/blobs', {
       content: gitBuf('show HEAD:' + path).toString('base64'),
       encoding: 'base64'
     });
     if (blob.sha !== wantBlob) throw new Error(path + ' blob 不一致: API=' + blob.sha + ' 本地=' + wantBlob + '，中止');
-    entries.push({ path, mode, type: 'blob', sha: blob.sha });
+    entries.push({ path, mode: newMode, type: 'blob', sha: blob.sha });
   }
   console.log('blobs 一致:', entries.length);
 
@@ -111,8 +121,8 @@ const PARENT = sh('%P');
   }
   if (!matched) throw new Error('三种消息形态均无法匹配本地哈希，未更新引用，中止');
 
-  const upd = await api('PATCH', '/git/refs/heads/' + BRANCH, { sha: LOCAL_SHA, force: false });
-  console.log('远端 ' + BRANCH + ' 已快进:', upd.object.sha);
+  const upd = await api('PATCH', '/git/refs/heads/' + BRANCH, { sha: LOCAL_SHA, force: true });
+  console.log('远端 ' + BRANCH + ' 已更新:', upd.object.sha);
 })().catch((e) => {
   // 只设退出码，不调 process.exit——让 undici 句柄自然关闭，规避 Windows libuv 断言
   console.error('FAIL:', e.message);
