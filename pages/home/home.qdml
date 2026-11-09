@@ -4,7 +4,7 @@
   <!-- 顶部：左上角昵称 -->
   <view class="top-bar">
     <view class="nickname">
-      <text class="nickname-text">{{nickname}}</text>
+      <text class="nickname-text">你好，{{nickname || '旅人'}}</text>
     </view>
     <view class="id-tip" wx:if="{{players.length > 0}}">
       我的玩家账号：{{players[0].playerId}}{{players.length > 1 ? '…等' + players.length + '个' : ''}}

@@ -36,10 +36,11 @@ Page({
 
   _refreshAuth: function () {
     var sess = Auth.session();
-    this.setData({
-      nickname: sess && sess.nickname ? sess.nickname : '加载中…',
-      openId: sess && sess.openId ? sess.openId : ''
-    });
+    var openId = sess && sess.openId ? sess.openId : '';
+    var nickname = sess && sess.nickname ? sess.nickname : '';
+    // 如果后端把 openId 当 nickname 返回（fetchNickname 失败兜底），就清空让模板显示"旅人"
+    if (nickname === openId) nickname = '';
+    this.setData({ nickname: nickname, openId: openId });
   },
 
   _loadPlayers: function () {
