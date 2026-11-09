@@ -275,3 +275,16 @@
   margin-top: 24rpx;
   line-height: 1.6;
 }
+
+/* ─── 底部免责声明 ─── */
+.disclaimer {
+  margin-top: 60rpx;
+  padding: 30rpx 0;
+  border-top: 1rpx solid rgba(255, 255, 255, 0.06);
+  text-align: center;
+}
+.disclaimer-line {
+  font-size: 22rpx;
+  color: #556677;
+  line-height: 1.8;
+}

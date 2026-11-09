@@ -109,4 +109,10 @@
     </view>
   </view>
 
+  <!-- 底部免责声明 -->
+  <view class="disclaimer">
+    <view class="disclaimer-line">本应用仅提供好友码交换服务，帮助旅人互相添加好友</view>
+    <view class="disclaimer-line">若遇他人白嫖，请及时拉黑止损，平台不承担相关责任</view>
+  </view>
+
 </view>
